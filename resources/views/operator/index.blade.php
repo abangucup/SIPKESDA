@@ -28,9 +28,13 @@
             <div class="col-12 col-md-12 order-md-12 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('dashboard_operator')}}"
-                                class="btn btn-primary">Tambah Operator</a></li>
+                        <li class="breadcrumb-item"><button type="button" class="btn btn-outline-primary"
+                                data-bs-toggle="modal" data-bs-target="#tambahOperator">
+                                Tambah Operator
+                            </button></li>
                     </ol>
+
+                    @include('operator.modal_tambah')
                 </nav>
             </div>
         </div>
@@ -38,19 +42,34 @@
             <table class="table table-striped" id="tabel_mahasiswa">
                 <thead>
                     <tr>
+                        <th>No</th>
                         <th>Nama</th>
                         <th>Username</th>
                         <th>Role</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($operators as $operator)
                     <tr>
-                        <td>{{$mahasiswa->nama}}</td>
-                        <td>{{$mahasiswa->username}}</td>
-                        <td>{{$mahasiswa->role}}</td>
+                        <td>{{$loop->iteration}}</td>
+                        <td>{{$operator->nama}}</td>
+                        <td>{{$operator->username}}</td>
+                        <td>{{$operator->role}}</td>
+                        <td class="col-sm-2">
+                            <button type="button" class="btn btn-outline-warning float-sm-start mb-2 me-4"
+                                data-bs-toggle="modal" data-bs-target="#editOperator-{{$operator->id}}">
+                                Edit
+                            </button>
+                            <form action="{{route('petugas.destroy', $operator->id)}}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" onclick="return confirm('Are you sure?')"
+                                    class="btn btn-outline-danger">Delete</button>
+                            </form>
+                        </td>
                     </tr>
-
+                    @include('operator.modal_edit')
                     @empty
                     @endforelse
                 </tbody>

@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('operators', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->string('username')->unique();
+            $table->string('password');
+            $table->string('no_hp')->nullable();
+            $table->enum('role', ['operator', 'kepala']);
             $table->timestamps();
         });
     }

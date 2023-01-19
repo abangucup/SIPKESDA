@@ -68,9 +68,7 @@
                                 @endforelse
                             </ul>
                         </td>
-
                     </tr>
-
                     @empty
                     @endforelse
                 </tbody>

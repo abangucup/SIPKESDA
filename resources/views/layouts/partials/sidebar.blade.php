@@ -18,7 +18,7 @@
 
 
                 <li class="sidebar-item {{Request::is('dashboard/operator') ? 'active' : ''}}">
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="{{ route('dashboard_operator')}}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
@@ -54,7 +54,7 @@
 
                 @elseif (auth()->user()->role == 'mahasiswa')
                 <li class="sidebar-item {{Request::is('dashboard/mahasiswa') ? 'active' : ''}}">
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="{{ route('dashboard_mahasiswa')}}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
@@ -77,7 +77,7 @@
                 @else
 
                 <li class="sidebar-item {{Request::is('dashboard/kepala') ? 'active' : ''}}">
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="{{ route('dashboard_kepala')}}" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>

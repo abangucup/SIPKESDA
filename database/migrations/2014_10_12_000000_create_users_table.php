@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('username')->unique();
             $table->string('password');
             $table->enum('role', ['operator', 'mahasiswa', 'kepala']);
+            $table->foreignId('mahasiswa_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('operator_id')->nullable()->constrained()->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

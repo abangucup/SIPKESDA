@@ -77,6 +77,7 @@ class AuthController extends Controller
         $mahasiswa->save();
 
         $user = new User();
+        $user->mahasiswa_id = $mahasiswa->id;
         $user->username = $mahasiswa->username;
         $user->password = Hash::make($request->password);
         $user->role = 'mahasiswa';

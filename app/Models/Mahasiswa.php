@@ -15,4 +15,9 @@ class Mahasiswa extends Model
         'berkas',
     ];
 
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
+
 }

@@ -18,8 +18,6 @@ class UserSeeder extends Seeder
     {
         $users = [
             ['username' => 'operator', 'password' => Hash::make('password'), 'role' => 'operator'],
-            ['username' => 'kepala', 'password' => Hash::make('password'), 'role' => 'kepala'],
-            ['username' => 'mahasiswa', 'password' => Hash::make('password'), 'role' => 'mahasiswa'],
         ];
 
         foreach($users as $user) 
