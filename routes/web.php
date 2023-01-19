@@ -2,18 +2,19 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\SubkriteriaController;
 use Illuminate\Support\Facades\Route;
 
 
+// Halaman Awal 
+Route::get('/', function() {
+    return view('home');
+})->name('home');
+
 // Batasan akses tamu
 Route::middleware(['guest'])->group(function() {
-
-    // Halaman Awal 
-    Route::get('/', function() {
-        return view('home');
-    })->name('home');
-
     // Halaman Login
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'storeLogin']);
@@ -30,13 +31,15 @@ Route::group(['middleware' => 'auth'], function() {
     Route::prefix('dashboard')->group(function(){
 
         // Dashboard Mahasiswa
-        Route::group(['middleware' => ['role:mahasiswa'], 'prefix' => '<mahasiswa></mahasiswa>'],function () {
+        Route::group(['middleware' => ['role:mahasiswa'], 'prefix' => 'mahasiswa'],function () {
             Route::get('/', [DashboardController::class, 'mahasiswa'])->name('dashboard_mahasiswa');
         });
 
         // Dasboard Operator
         Route::group(['middleware' => ['role:operator'], 'prefix' => 'operator'],function () {
             Route::get('/', [DashboardController::class, 'operator'])->name('dashboard_operator');
+            Route::resource('/kriteria', KriteriaController::class);
+            Route::resource('/subkriteria', SubkriteriaController::class);
         });
 
         // Dasboard Kepala Bagian

@@ -17,18 +17,33 @@
 
         <div class="row h-100">
             <div class="col-lg-12 col-12 d-flex justify-content-center">
-                <div class="container pt-4">
-                    <div class="text-center">
-                        <h1 class="auth-title">SIPKESDA</h1>
-                        <p class="auth-subtitle mb-5">Sistem Informasi Pendukung Keputusan Penerima Beasiswa Daerah</p>
-                        <img class="img-fluid" src="{{ asset('assets/images/banner/login.png')}}" alt="Logo">
-                    </div>
+                <div class="card">
+                    <div class="container pt-4">
+                        <div class="text-center">
+                            <h1 class="auth-title">SIPKESDA</h1>
+                            <p class="auth-subtitle mb-5">Sistem Informasi Pendukung Keputusan Penerima Beasiswa Daerah
+                            </p>
+                            <img class="img-fluid" src="{{ asset('assets/images/banner/login.png')}}" alt="Logo">
+                        </div>
 
-                    <div class="d-grid gap-2">
-
-                        <a href="{{route('login')}}" class="btn btn-primary btn-block btn-lg mt-5">Masuk</a>
-                        <a href="{{route('register')}}" class="btn btn-outline-secondary btn-block btn-lg mt-2">Daftar</a>
-                        
+                        <div class="d-grid gap-2">
+                            @auth
+                                @if (auth()->user()->role == 'operator')
+                                <a href="{{route('dashboard_operator')}}"
+                                    class="btn btn-outline-secondary btn-block btn-lg mt-2">Dashboard</a>
+                                @elseif (auth()->user()->role == 'mahasiswa')
+                                <a href="{{route('dashboard_mahasiswa')}}"
+                                    class="btn btn-outline-secondary btn-block btn-lg mt-2">Dashboard</a>
+                                @else
+                                <a href="{{route('dashboard_kepala')}}"
+                                    class="btn btn-outline-secondary btn-block btn-lg mt-2">Dashboard</a>
+                                @endif
+                            @else
+                                <a href="{{route('login')}}" class="btn btn-primary btn-block btn-lg mt-5">Masuk</a>
+                                <a href="{{route('register')}}"
+                                    class="btn btn-outline-secondary btn-block btn-lg mt-2">Daftar</a>
+                            @endauth
+                        </div>
                     </div>
                 </div>
             </div>
