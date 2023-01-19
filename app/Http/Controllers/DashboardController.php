@@ -6,20 +6,18 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function mahasiswa() 
+    public function mahasiswa()
     {
-        echo "HALAMAN MAHASISWA";
+        return view('mahasiswa.dashboard');
     }
 
     public function operator()
     {
-        echo "HALAMAN OPERATOR";
+        return view('operator.dashboard');
     }
 
     public function kepala()
     {
-        echo "HALAMAN KEPALA";
+        return view('kepala.dashboard');
     }
-
 }
-

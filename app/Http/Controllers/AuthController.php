@@ -82,6 +82,15 @@ class AuthController extends Controller
         $user->role = 'mahasiswa';
         $user->save();
 
-        return to_route('login');
+        Auth::login($user);
+
+        return redirect()->intended('dashboard_mahasiswa');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        
+        return redirect()->route('home');
     }
 }
