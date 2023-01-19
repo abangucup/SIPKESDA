@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('subkriterias', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('kriteria_id')->constrained()->onDelete('cascade');
+            $table->string('subkriteria');
+            $table->float('nilai');
             $table->timestamps();
         });
     }
