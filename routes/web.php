@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\SubkriteriaController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,9 @@ Route::group(['middleware' => 'auth'], function() {
         // Dasboard Operator
         Route::group(['middleware' => ['role:operator'], 'prefix' => 'operator'],function () {
             Route::get('/', [DashboardController::class, 'operator'])->name('dashboard_operator');
+            Route::resource('/petugas', OperatorController::class);
+            Route::get('/mahasiswa', [MahasiswaController::class, 'list_mahasiswa'])->name('list_mahasiswa');
+            Route::get('/beasiswa', [DashboardController::class, 'nilai_mahasiswa'])->name('nilai_mahasiswa');
             Route::resource('/kriteria', KriteriaController::class);
             Route::resource('/subkriteria', SubkriteriaController::class);
         });

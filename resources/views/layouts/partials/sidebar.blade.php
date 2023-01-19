@@ -24,32 +24,32 @@
                     </a>
                 </li>
 
-
-                <li class="sidebar-title">Pages</li>
-
-                <li class="sidebar-item  ">
-                    <a href="application-email.html" class='sidebar-link'>
-                        <i class="bi bi-envelope-fill"></i>
-                        <span>Email Application</span>
+                <li class="sidebar-item {{Request::is('dashboard/operator/petugas') ? 'active' : ''}}">
+                    <a href="{{ route('petugas.index')}}" class='sidebar-link'>
+                        <i class="bi bi-person-badge"></i>
+                        <span>Data Operator</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item  has-sub">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-person-badge-fill"></i>
-                        <span>Authentication</span>
+                <li class="sidebar-item {{Request::is('dashboard/operator/mahasiswa') ? 'active' : ''}}">
+                    <a href="{{route('list_mahasiswa')}}" class='sidebar-link'>
+                        <i class="bi bi-people"></i>
+                        <span>Data Mahasiswa</span>
                     </a>
-                    <ul class="submenu ">
-                        <li class="submenu-item ">
-                            <a href="auth-login.html">Login</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="auth-register.html">Register</a>
-                        </li>
-                        <li class="submenu-item ">
-                            <a href="auth-forgot-password.html">Forgot Password</a>
-                        </li>
-                    </ul>
+                </li>
+
+                <li class="sidebar-item {{Request::is('dashboard/operator/kriteria') ? 'active' : ''}}">
+                    <a href="{{ route('kriteria.index')}}" class='sidebar-link'>
+                        <i class="bi bi-card-checklist"></i>
+                        <span>Data Kriteria</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item {{Request::is('dashboard/operator/beasiswa') ? 'active' : ''}}">
+                    <a href="{{route('nilai_mahasiswa')}}" class='sidebar-link'>
+                        <i class="bi bi-info-circle"></i>
+                        <span>Data Beasiswa</span>
+                    </a>
                 </li>
 
                 @elseif (auth()->user()->role == 'mahasiswa')
