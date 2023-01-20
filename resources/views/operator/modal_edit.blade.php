@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="modalEditOperator">Login Form </h4>
+                <h4 class="modal-title" id="modalEditOperator">Modal Edit Operator</h4>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <i data-feather="x"></i>
                 </button>
@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <input type="text" placeholder="Nomor HP" class="form-control" value="{{old('no_hp', $operator->no_hp)}}" name="no_hp">
                     </div>
-                    <label>Username: </label>
+                    <label>Role: </label>
                     <div class="form-group">
                         <select name="role" class="form-select">
                             <option value="{{old('role', $operator->role)}}" selected>{{$operator->role}}</option>

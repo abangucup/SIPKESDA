@@ -28,9 +28,12 @@
             <div class="col-12 col-md-12 order-md-12 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('kriteria.create')}}"
-                                class="btn btn-primary">Tambah Kriteria</a></li>
+                        <li class="breadcrumb-item"><button type="button" class="btn btn-outline-primary"
+                                data-bs-toggle="modal" data-bs-target="#tambahKriteria">
+                                Tambah Kriteria
+                            </button></li>
                     </ol>
+                    @include('operator.kriteria.modal_tambah')
                 </nav>
             </div>
         </div>
@@ -38,18 +41,19 @@
             <table class="table table-striped" id="tabel_mahasiswa">
                 <thead>
                     <tr>
-                        <th>No</th>
+                        <th class="text-center">No</th>
                         <th>Kode</th>
                         <th>Kriteria</th>
                         <th>Bobot</th>
                         <th>Jenis</th>
                         <th>Subkriteria</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($kriterias as $kriteria)
                     <tr>
-                        <td>{{$loop->iteration}}</td>
+                        <td class="text-center">{{$loop->iteration}}</td>
                         <td>{{$kriteria->kode}}</td>
                         <td>{{$kriteria->kriteria}}</td>
                         <td>{{$kriteria->bobot}}</td>
@@ -60,15 +64,33 @@
                             <span class="badge bg-secondary">{{$kriteria->jenis}}</span>
                             @endif
                         </td>
-                        <td>
+                        <td class="col-3">
+                            @forelse ($kriteria->subkriteria as $subkriteria)
                             <ul>
-                                @forelse ($subkriterias as $subkriteria)
-                                <li>{{$subkriteria->subkriteria}}</li>
-                                @empty
-                                @endforelse
+                                <li>{{$kriteria->subkriteria}}</li>
                             </ul>
+                            @empty
+                            Belum Ada Subkriteria
+                            @endforelse
+                        </td>
+                        <td class="col-2">
+                            <a type="button" class="btn btn-outline-secondary float-sm-start mb-2 me-2"
+                                href="{{route('kriteria.show', $kriteria->id)}}">
+                                Detail
+                            </a>
+                            <button type="button" class="btn btn-outline-warning float-sm-start mb-2 me-2" data-bs-toggle="modal"
+                                data-bs-target="#editKriteria-{{$kriteria->id}}">
+                                Edit
+                            </button>
+                            <form action="{{route('kriteria.destroy', $kriteria->id)}}" method="POST">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" onclick="return confirm('Are you sure?')"
+                                    class="btn btn-outline-danger">Delete</button>
+                            </form>
                         </td>
                     </tr>
+                    @include('operator.kriteria.modal_edit')
                     @empty
                     @endforelse
                 </tbody>

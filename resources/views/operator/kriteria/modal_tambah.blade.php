@@ -1,37 +1,33 @@
-<div class="modal fade text-left" id="tambahOperator" tabindex="-1" role="dialog" aria-labelledby="modalTambahOperator"
+<div class="modal fade text-left" id="tambahKriteria" tabindex="-1" role="dialog" aria-labelledby="modalTambahKriteria"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="modalTambahOperator">Model Tambah Operator</h4>
+                <h4 class="modal-title" id="modalTambahKriteria">Modal Tambah Kriteria</h4>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <i data-feather="x"></i>
                 </button>
             </div>
-            <form action="{{route('petugas.store')}}" method="POST">
+            <form action="{{route('kriteria.store')}}" method="POST">
                 @csrf
                 <div class="modal-body">
-                    <label>Nama Opeator: </label>
+                    <label>Kode: </label>
                     <div class="form-group">
-                        <input type="text" placeholder="Nama Operator" class="form-control" name="nama" required>
+                        <input type="text" placeholder="Kode Kriteria" class="form-control" name="kode" required>
                     </div>
-                    <label>Username: </label>
+                    <label>Kriteria: </label>
                     <div class="form-group">
-                        <input type="text" placeholder="Username" class="form-control" name="username" required>
+                        <input type="text" placeholder="Kriteria" class="form-control" name="kriteria" required>
                     </div>
-                    <label>Password: </label>
+                    <label>Bobot: </label>
                     <div class="form-group">
-                        <input type="password" placeholder="Password" class="form-control" name="password" required>
+                        <input type="text" placeholder="Bobot" class="form-control" name="bobot" required>
                     </div>
-                    <label>No HP / WA: </label>
+                    <label>Jenis: </label>
                     <div class="form-group">
-                        <input type="text" placeholder="Nomor HP" class="form-control" name="no_hp">
-                    </div>
-                    <label>Role: </label>
-                    <div class="form-group">
-                        <select name="role" class="form-select">
-                            <option value="operator">Operator</option>
-                            <option value="kepala">Kepala Bagian</option>
+                        <select name="jenis" class="form-select">
+                            <option value="benefit">Benefit</option>
+                            <option value="cost">Cost</option>
                         </select>
                     </div>
                 </div>
