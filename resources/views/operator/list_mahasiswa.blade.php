@@ -52,7 +52,9 @@
                     </tr>
                         
                     @empty
-                        <p>Belum Ada Mahasiswa Yang Mendaftar</p>
+                    <tr>
+                        <td colspan="8" class="text-center">Belum Ada Mahasiswa Yang Mendaftar</td>
+                    </tr>
                     @endforelse
                 </tbody>
             </table>

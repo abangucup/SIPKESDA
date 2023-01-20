@@ -67,7 +67,7 @@
                         <td class="col-3">
                             @forelse ($kriteria->subkriteria as $subkriteria)
                             <ul>
-                                <li>{{$kriteria->subkriteria}}</li>
+                                <li>{{$subkriteria->subkriteria}} ({{$subkriteria->nilai}})</li>
                             </ul>
                             @empty
                             Belum Ada Subkriteria

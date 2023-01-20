@@ -35,6 +35,12 @@ class KriteriaController extends Controller
         return back();
     }
 
+    public function show($id)
+    {
+        $kriteria = Kriteria::where('id', $id)->first();
+        return view('operator.kriteria.detail', compact('kriteria'));
+    }
+
     public function destroy($id)
     {
         Kriteria::destroy($id);
