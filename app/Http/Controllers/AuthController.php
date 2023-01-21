@@ -85,7 +85,8 @@ class AuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->intended('dashboard_mahasiswa');
+        // return redirect()->intended('dashboard_mahasiswa');
+        return redirect()->route('dashboard_mahasiswa');
     }
 
     public function logout()

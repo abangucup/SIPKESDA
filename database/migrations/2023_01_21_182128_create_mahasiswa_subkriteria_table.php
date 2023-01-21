@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('subkriteria_mahasiswa', function (Blueprint $table) {
+        Schema::create('mahasiswa_subkriteria', function (Blueprint $table) {
             $table->id();
             $table->foreignId('mahasiswa_id')->constrained()->onDelete('cascade');
             $table->foreignId('subkriteria_id')->constrained()->onDelete('cascade');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subkriteria_mahasiswa');
+        Schema::dropIfExists('mahasiswa_subkriteria');
     }
 };

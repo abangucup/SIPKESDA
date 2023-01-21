@@ -32,7 +32,7 @@
                         @forelse ($kriterias as $kriteria)
                         <th>{{$kriteria->kriteria}}</th>
                         @empty
-                        <th>Belum Ada Kriteria</th>
+                        <th class="text-center">Belum Ada Kriteria</th>
                         @endforelse
                         <th>Aksi</th>
                     </tr>
@@ -46,12 +46,22 @@
                         @empty
                         <td colspan="{{count($kriterias)}}" class="text-center">Tidak Ada Data</td>
                         @endforelse
+                        @if ($mahasiswa->subkriteria->isEmpty())
+                        <td class="col-2">
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="btn btn-outline-info float-sm-start mb-2 me-4"
+                                    id="nav-tambah-kriteria-mahasiswa" data-bs-toggle="tab"
+                                    data-bs-target="#nav-tambahKriteriaMahasiswa" type="button" role="tab"
+                                    aria-controls="nav-tambahKriteriaMahasiswa" aria-selected="false">Tambah</button>
+                            </div>
+                        </td>
+                        @else
                         <td class="col-2">
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <button class="btn btn-outline-warning float-sm-start mb-2 me-4"
-                                    id="nav-kriteria-mahasiswa" data-bs-toggle="tab"
-                                    data-bs-target="#nav-kriteriaMahasiswa" type="button" role="tab"
-                                    aria-controls="nav-kriteriaMahasiswa" aria-selected="false">Edit</button>
+                                    id="nav-edit-kriteria-mahasiswa" data-bs-toggle="tab"
+                                    data-bs-target="#nav-editKriteriaMahasiswa-{{$mahasiswa->id}}" type="button" role="tab"
+                                    aria-controls="nav-editKriteriaMahasiswa" aria-selected="false">Edit</button>
                                 <form action="{{route('beasiswa.destroy', $mahasiswa->id)}}" method="POST">
                                     @method('DELETE')
                                     @csrf
@@ -60,15 +70,106 @@
                                 </form>
                             </div>
                         </td>
+                        @endif
                     </tr>
                 </tbody>
             </table>
-            <div class="card col-sm-6">
+
+            {{-- Tambah Kriteria --}}
+            <div class="card col-sm-12">
                 <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade" id="nav-kriteriaMahasiswa" role="tabpanel"
-                        aria-labelledby="nav-kriteria-mahasiswa">123</div>
+                    <div class="tab-pane fade" id="nav-tambahKriteriaMahasiswa" role="tabpanel"
+                        aria-labelledby="nav-tambah-kriteria-mahasiswa">
+
+                        <div class="d-flex justify-content-center">
+                            <form class="form form-vertical col-sm-4" action="{{route('beasiswa.store')}}"
+                                method="POST">
+                                @csrf
+                                @forelse ($kriterias as $kriteria)
+                                <div class="col-12">
+                                    <div class="form-group has-icon-left">
+                                        <label for="first-name-icon">{{$kriteria->kriteria}}</label>
+                                        <div class="position-relative">
+                                            <select name="subkriteria_id[]"
+                                                class="form-select form-control form-control-lg">
+                                                @forelse ($kriteria->subkriteria as $subkriteria)
+
+                                                <option value="{{$subkriteria->id}}">{{$subkriteria->subkriteria}}
+                                                </option>
+                                                @empty
+                                                <option value="#">Tidak Ada Subkriteria</option>
+                                                @endforelse
+                                            </select>
+                                            <div class="form-control-icon">
+                                                <i class="bi bi-check"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @empty
+                                <h3>Belum Ada Kriteria</h3>
+                                @endforelse
+                                @if ($kriterias != null)
+
+                                <div class="col-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                </div>
+                                @endif
+                            </form>
+                        </div>
+
+                    </div>
                 </div>
             </div>
+            {{-- End Tambah --}}
+
+            {{-- Edit Kriteria --}}
+            <div class="card col-sm-12">
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade" id="nav-editKriteriaMahasiswa-{{$mahasiswa->id}}" role="tabpanel"
+                        aria-labelledby="nav-edit-kriteria-mahasiswa">
+                        <div class="d-flex justify-content-center">
+                            <form class="form form-vertical col-sm-4" action="{{route('beasiswa.update')}}"
+                                method="POST">
+                                @csrf
+                                @method('PUT')
+                                @forelse ($kriterias as $kriteria)
+                                <div class="col-12">
+                                    <div class="form-group has-icon-left">
+                                        <label for="first-name-icon">{{$kriteria->kriteria}}</label>
+                                        <div class="position-relative">
+                                            <select name="subkriteria_id[]"
+                                                class="form-select form-control form-control-lg">
+                                                @forelse ($kriteria->subkriteria as $subkriteria)
+                                                <option value="{{$subkriteria->id}}">{{$subkriteria->subkriteria}}
+                                                </option>
+                                                @empty
+                                                <option value="#">Tidak Ada Subkriteria</option>
+                                                @endforelse
+                                            </select>
+                                            <div class="form-control-icon">
+                                                <i class="bi bi-check"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @empty
+                                <h3>Belum Ada Kriteria</h3>
+                                @endforelse
+                                @if ($kriterias != null)
+
+                                <div class="col-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                                </div>
+                                @endif
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            {{-- End Edit --}}
         </div>
     </div>
 </section>

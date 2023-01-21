@@ -36,7 +36,9 @@ Route::group(['middleware' => 'auth'], function() {
         Route::group(['middleware' => ['role:mahasiswa'], 'prefix' => 'mahasiswa'],function () {
             Route::get('/', [DashboardController::class, 'mahasiswa'])->name('dashboard_mahasiswa');
             Route::get('/beasiswa', [MahasiswaController::class, 'beasiswa'])->name('beasiswa');
-            Route::post('/beasiswa', [MahasiswaController::class, 'stroreBeasiswa']);
+            Route::post('/beasiswa', [MahasiswaController::class, 'storeBeasiswa'])->name('beasiswa.store');
+            Route::put('/beasiswa', [MahasiswaController::class, 'updateBeasiswa'])->name('beasiswa.update');
+            Route::delete('/besiswa', [MahasiswaController::class, 'destroyBeasiswa'])->name('beasiswa.destroy');
             Route::delete('/beasiswa', [MahasiswaController::class, 'destroyBeasiswa'])->name('beasiswa.destroy');
             Route::get('/hasil', [MahasiswaController::class, 'hasil'])->name('hasilMahasiswa');
         });

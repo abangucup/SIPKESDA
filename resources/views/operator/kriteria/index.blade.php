@@ -70,7 +70,9 @@
                                 <li>{{$subkriteria->subkriteria}} ({{$subkriteria->nilai}})</li>
                             </ul>
                             @empty
-                            Belum Ada Subkriteria
+                            <ul>
+                                <li>Belum Ada Subkriteria</li>
+                            </ul>
                             @endforelse
                         </td>
                         <td class="col-2">
@@ -92,6 +94,9 @@
                     </tr>
                     @include('operator.kriteria.modal_edit')
                     @empty
+                    <tr>
+                        <td colspan="7" class="text-center">Belum Ada Kriteria</td>
+                    </tr>
                     @endforelse
                 </tbody>
             </table>

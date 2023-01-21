@@ -19,8 +19,8 @@ class Subkriteria extends Model
         return $this->belongsTo(Kriteria::class);
     }
 
-    // public function mahasiswa()
-    // {
-    //     return $this->belongsTo(Mahasiswa::class);
-    // }
+    public function mahasiswa()
+    {
+        return $this->belongsToMany(Mahasiswa::class, 'mahasiswa_subkriteria', 'subkriteria_id', 'mahasiswa_id');
+    }
 }
