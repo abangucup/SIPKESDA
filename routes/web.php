@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KriteriaController;
+use App\Http\Controllers\MabacController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\SubkriteriaController;
@@ -34,14 +35,19 @@ Route::group(['middleware' => 'auth'], function() {
         // Dashboard Mahasiswa
         Route::group(['middleware' => ['role:mahasiswa'], 'prefix' => 'mahasiswa'],function () {
             Route::get('/', [DashboardController::class, 'mahasiswa'])->name('dashboard_mahasiswa');
+            Route::get('/beasiswa', [MahasiswaController::class, 'beasiswa'])->name('beasiswa');
+            Route::post('/beasiswa', [MahasiswaController::class, 'stroreBeasiswa']);
+            Route::delete('/beasiswa', [MahasiswaController::class, 'destroyBeasiswa'])->name('beasiswa.destroy');
+            Route::get('/hasil', [MahasiswaController::class, 'hasil'])->name('hasilMahasiswa');
         });
 
         // Dasboard Operator
         Route::group(['middleware' => ['role:operator'], 'prefix' => 'operator'],function () {
             Route::get('/', [DashboardController::class, 'operator'])->name('dashboard_operator');
             Route::resource('/petugas', OperatorController::class);
-            Route::get('/mahasiswa', [MahasiswaController::class, 'list_mahasiswa'])->name('list_mahasiswa');
-            Route::get('/beasiswa', [DashboardController::class, 'nilai_mahasiswa'])->name('nilai_mahasiswa');
+            Route::get('/mahasiswa', [OperatorController::class, 'mahasiswa'])->name('operator.mahasiswa');
+            Route::get('/beasiswa', [OperatorController::class, 'beasiswa'])->name('operator.beasiswa');
+            Route::get('/hasil', [MabacController::class, 'index'])->name('hasil.index');
             Route::resource('/kriteria', KriteriaController::class);
             Route::resource('/subkriteria', SubkriteriaController::class);
         });

@@ -37,7 +37,7 @@
                 </nav>
             </div>
         </div>
-        <div class="card-body">
+        <div class="card-body shadow">
             <table class="table table-striped" id="tabel_mahasiswa">
                 <thead>
                     <tr>

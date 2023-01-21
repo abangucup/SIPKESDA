@@ -32,7 +32,7 @@
                 </li>
 
                 <li class="sidebar-item {{Request::is('dashboard/operator/mahasiswa') ? 'active' : ''}}">
-                    <a href="{{route('list_mahasiswa')}}" class='sidebar-link'>
+                    <a href="{{route('operator.mahasiswa')}}" class='sidebar-link'>
                         <i class="bi bi-people"></i>
                         <span>Data Mahasiswa</span>
                     </a>
@@ -46,9 +46,16 @@
                 </li>
 
                 <li class="sidebar-item {{Request::is('dashboard/operator/beasiswa') ? 'active' : ''}}">
-                    <a href="{{route('nilai_mahasiswa')}}" class='sidebar-link'>
+                    <a href="{{route('operator.beasiswa')}}" class='sidebar-link'>
                         <i class="bi bi-info-circle"></i>
                         <span>Data Beasiswa</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item {{Request::is('dashboard/operator/hasil') ? 'active' : ''}}">
+                    <a href="{{route('hasil.index')}}" class='sidebar-link'>
+                        <i class="bi bi-info-circle"></i>
+                        <span>Proses Hitung</span>
                     </a>
                 </li>
 
@@ -60,15 +67,15 @@
                     </a>
                 </li>
 
-                <li class="sidebar-item {{Request::is('dashboard/beasiswa') ? 'active' : ''}}">
-                    <a href="beasiswa" class='sidebar-link'>
+                <li class="sidebar-item {{Request::is('dashboard/mahasiswa/beasiswa') ? 'active' : ''}}">
+                    <a href="{{route('beasiswa')}}" class='sidebar-link'>
                         <i class="bi bi-person"></i>
                         <span>Data Beasiswa</span>
                     </a>
                 </li>
 
-                <li class="sidebar-item {{Request::is('dashboard/hasil') ? 'active' : ''}}">
-                    <a href="#" class='sidebar-link'>
+                <li class="sidebar-item {{Request::is('dashboard/mahasiswa/hasil') ? 'active' : ''}}">
+                    <a href="{{route('hasilMahasiswa')}}" class='sidebar-link'>
                         <i class="bi bi-arrow-clockwise"></i>
                         <span>Hasil</span>
                     </a>

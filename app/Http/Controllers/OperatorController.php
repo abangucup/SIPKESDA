@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kriteria;
+use App\Models\Mahasiswa;
 use App\Models\Operator;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -9,6 +11,19 @@ use Illuminate\Support\Facades\Hash;
 
 class OperatorController extends Controller
 {
+    public function beasiswa()
+    {
+        $kriterias = Kriteria::all();
+        $mahasiswas = Mahasiswa::all();
+        return view('operator.penerima_beasiswa', compact('mahasiswas', 'kriterias'));
+    }
+
+    public function mahasiswa()
+    {
+        $mahasiswas = Mahasiswa::all();
+        return view('operator.list_mahasiswa', compact('mahasiswas'));
+    }
+
     public function index()
     {
         $operators = Operator::all();

@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-6 col-lg-4 col-md-6">
                     <div class="card">
-                        <div class="card-body px-3 py-4-5">
+                        <div class="card-body px-3 py-4-5 shadow">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="stats-icon purple">
@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-6 col-lg-4 col-md-6">
                     <div class="card">
-                        <div class="card-body px-3 py-4-5">
+                        <div class="card-body px-3 py-4-5 shadow">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="stats-icon blue">
@@ -50,7 +50,7 @@
                 </div>
                 <div class="col-6 col-lg-4 col-md-6">
                     <div class="card">
-                        <div class="card-body px-3 py-4-5">
+                        <div class="card-body px-3 py-4-5 shadow">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="stats-icon green">
@@ -68,7 +68,7 @@
             </div>
             <div class="row">
                 <div class="col-12 col-xl-12">
-                    <div class="card">
+                    <div class="card shadow">
                         <div class="card-header">
                             <h4>Pendaftar Terakhir</h4>
                         </div>
@@ -96,7 +96,9 @@
                                             <td>{{$mahasiswa->created_at}}</td>
                                         </tr>
                                         @empty
-                                            
+                                        <tr>
+                                            <td colspan="6" class="text-center">Belum Ada Pendaftar</td>
+                                        </tr>
                                         @endforelse
                                         
                                     </tbody>

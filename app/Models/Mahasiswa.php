@@ -20,4 +20,10 @@ class Mahasiswa extends Model
         return $this->hasOne(User::class);
     }
 
+    public function subkriteria()
+    {
+        return $this->belongsToMany(Subkriteria::class);
+    }
+    
+
 }

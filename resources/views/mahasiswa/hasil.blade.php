@@ -29,33 +29,18 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Nama</th>
-                        <th>Username</th>
-                        <th>Alamat</th>
-                        <th>No HP</th>
-                        <th>Kampus</th>
-                        <th>Jurusan</th>
-                        <th>Prodi</th>
+                        <th>Nama Mahasiswa</th>
+                        <th>Nilai Total</th>
+                        <th>Rangking</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($mahasiswas as $mahasiswa)
                     <tr>
-                        <td>{{$loop->iteration}}</td>
-                        <td>{{$mahasiswa->nama}}</td>
-                        <td>{{$mahasiswa->username}}</td>
-                        <td>{{$mahasiswa->alamat}}</td>
-                        <td>{{$mahasiswa->no_hp}}</td>
-                        <td>{{$mahasiswa->kampus}}</td>
-                        <td>{{$mahasiswa->jurusan}}</td>
-                        <td>{{$mahasiswa->prodi}}</td>
+                        <td>1</td>
+                        <td>Salman Mustapa</td>
+                        <td>100</td>
+                        <td>Rangking 1</td>
                     </tr>
-                        
-                    @empty
-                    <tr>
-                        <td colspan="8" class="text-center">Belum Ada Mahasiswa Yang Mendaftar</td>
-                    </tr>
-                    @endforelse
                 </tbody>
             </table>
         </div>

@@ -18,4 +18,9 @@ class Subkriteria extends Model
     {
         return $this->belongsTo(Kriteria::class);
     }
+
+    // public function mahasiswa()
+    // {
+    //     return $this->belongsTo(Mahasiswa::class);
+    // }
 }
