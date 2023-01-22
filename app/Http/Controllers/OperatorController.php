@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Kriteria;
 use App\Models\Mahasiswa;
 use App\Models\Operator;
+use App\Models\Subkriteria;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -16,6 +17,13 @@ class OperatorController extends Controller
         $kriterias = Kriteria::all();
         $mahasiswas = Mahasiswa::all();
         return view('operator.penerima_beasiswa', compact('mahasiswas', 'kriterias'));
+    }
+
+    public function detail($mahasiswa_id)
+    {
+        $mahasiswa = Mahasiswa::where('id', $mahasiswa_id)->with('subkriteria')->first();
+        $subkriterias = $mahasiswa->subkriteria;
+        return view('operator.detail_penerima', compact('mahasiswa', 'subkriterias'));
     }
 
     public function mahasiswa()

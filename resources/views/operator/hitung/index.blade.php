@@ -34,11 +34,13 @@
                     data-bs-target="#nav-keputusanAwal" type="button" role="tab" aria-controls="nav-keputusanAwal"
                     aria-selected="false">Keputusan Awal</button>
 
-                <button class="nav-link me-3" id="na-normalisasi-awal" data-bs-toggle="tab" data-bs-target="#nav-normalisasiAwal"
-                    type="button" role="tab" aria-controls="nav-normalisasiAwal" aria-selected="false">Normalisasi</button>
+                <button class="nav-link me-3" id="na-normalisasi-awal" data-bs-toggle="tab"
+                    data-bs-target="#nav-normalisasiAwal" type="button" role="tab" aria-controls="nav-normalisasiAwal"
+                    aria-selected="false">Normalisasi</button>
 
-                <button class="nav-link me-3" id="nav-elemen-tertimbang" data-bs-toggle="tab" data-bs-target="#nav-elemenTertimbang"
-                    type="button" role="tab" aria-controls="nav-elemenTertimbang" aria-selected="false">Tertimbang</button>
+                <button class="nav-link me-3" id="nav-elemen-tertimbang" data-bs-toggle="tab"
+                    data-bs-target="#nav-elemenTertimbang" type="button" role="tab" aria-controls="nav-elemenTertimbang"
+                    aria-selected="false">Tertimbang</button>
 
                 <button class="nav-link me-3" id="nav-perkiraan-batas" data-bs-toggle="tab"
                     data-bs-target="#nav-perkiraanBatas" type="button" role="tab" aria-controls="nav-perkiraanBatas"
@@ -48,21 +50,21 @@
                     data-bs-target="#nav-jarakAlternatif" type="button" role="tab" aria-controls="nav-jarakAlternatif"
                     aria-selected="false">Jarak Alternatif</button>
 
-                <button class="nav-link me-3" id="nav-ranking-alternatif" data-bs-toggle="tab" data-bs-target="#nav-rankingAlternatif"
-                    type="button" role="tab" aria-controls="nav-rankingAlternatif"
-                    aria-selected="false">Perengkingan</button>
+                <button class="nav-link me-3" id="nav-ranking-alternatif" data-bs-toggle="tab"
+                    data-bs-target="#nav-rankingAlternatif" type="button" role="tab"
+                    aria-controls="nav-rankingAlternatif" aria-selected="false">Perengkingan</button>
 
             </div>
 
             <div class="tab-content mt-4" id="nav-tabContent">
 
-                {{-- CONTENT DATA KRITERIA MAHASISWA --}}
+                {{-- CONTENT DATA KRITERIA MAHASISWA FIX--}}
                 <div class="tab-pane fade show active" id="nav-kriteriaMahasiswa" role="tabpanel"
                     aria-labelledby="nav-kriteria-mahasiswa">
                     <table class="table table-striped" id="tabel_mahasiswa">
                         <thead>
                             <tr>
-                                <th class="col-2">Kriteria</th>
+                                <th class="col-2">Nama Mahasiswa</th>
                                 @forelse ($kriterias as $kriteria)
                                 <th>{{$kriteria->kriteria}}</th>
                                 @empty
@@ -75,11 +77,11 @@
                             <tr>
                                 <td>{{$mahasiswa->nama}}</td>
                                 @forelse ($mahasiswa->subkriteria as $subkriteria)
-                                <td>{{$subkriteria->nilai}}</td>
+                                <td>{{$subkriteria->subkriteria}}</td>
                                 @empty
                                 <td colspan="{{count($kriterias)}}" class="text-center">Tidak Ada Data</td>
                                 @endforelse
-                                
+
                             </tr>
                             @empty
                             <tr>
@@ -91,15 +93,14 @@
                 </div>
                 {{-- END CONTENT KRITERIA MAHASISWA --}}
 
-                {{-- CONTENT KEPUTASAN AWAL --}}
-                <div class="tab-pane fade" id="nav-keputusanAwal" role="tabpanel"
-                    aria-labelledby="nav-keputusan-awal">
+                {{-- CONTENT KEPUTASAN AWAL FIX--}}
+                <div class="tab-pane fade" id="nav-keputusanAwal" role="tabpanel" aria-labelledby="nav-keputusan-awal">
                     <table class="table table-striped" id="keputusan_awal">
                         <thead>
                             <tr>
                                 <th class="col-2">Keputusan Awal</th>
                                 @forelse ($kriterias as $kriteria)
-                                <th>{{$kriteria->kriteria}}</th>
+                                <th>{{$kriteria->kriteria}} ({{$kriteria->jenis}})</th>
                                 @empty
                                 <th>Belum Ada Kriteria</th>
                                 @endforelse
@@ -114,7 +115,7 @@
                                 @empty
                                 <td colspan="{{count($kriterias)}}" class="text-center">Tidak Ada Data</td>
                                 @endforelse
-                                
+
                             </tr>
                             @empty
                             <tr>
@@ -145,11 +146,42 @@
                             <tr>
                                 <td>{{$mahasiswa->nama}}</td>
                                 @forelse ($mahasiswa->subkriteria as $subkriteria)
-                                <td>{{$subkriteria->nilai}}</td>
+                                @php
+                                $sub = $subkriteria->kriteria->kriteria;
+                                @endphp
+                                {{-- <td>{{($subkriteria->nilai - (float)$min[$sub]) / (float)$max[$sub] - (float)$min[$sub]}}</td> --}}
+                                @if ($subkriteria->kriteria->jenis == "benefit")
+                               
+                                @php
+                                $sub = $subkriteria->kriteria->kriteria;
+                                $normal = ($subkriteria->nilai - (float)$min[$sub]) / ((float)$max[$sub] - (float)$min[$sub])
+                                @endphp
+                                <td>{{$normal}}</td>
+
+                                @else
+
+                                @php
+                                $sub = $subkriteria->kriteria->kriteria;
+                                $normal = ($subkriteria->nilai - (float)$min[$sub]) / ((float)$max[$sub] - (float)$min[$sub])
+                                @endphp
+                                <td>{{$normal}}</td>
+
+                                @endif
+                                
+                                {{-- <td>{{$min[$sub]}}</td> --}}
+                                {{-- <td>{{ ($subkriteria->nilai - (float)$min[$sub]) / (float)$max[$sub] -
+                                    (float)$min[$sub]}} </td> --}}
+                                {{-- @if ($subkriteria->kriteria->jenis == "benefit")
+                                <td>{{ ($subkriteria->nilai - (float)$min[$sub]) / (float)$max[$sub] -
+                                    (float)$min[$sub]}}</td>
+                                @else
+                                <td>{{ ($subkriteria->nilai - (float)$max[$sub]) / (float)$max[$sub] -
+                                    (float)$min[$sub]}}</td>
+                                @endif --}}
                                 @empty
                                 <td colspan="{{count($kriterias)}}" class="text-center">Tidak Ada Data</td>
                                 @endforelse
-                                
+
                             </tr>
                             @empty
                             <tr>
@@ -184,7 +216,7 @@
                                 @empty
                                 <td colspan="{{count($kriterias)}}" class="text-center">Tidak Ada Data</td>
                                 @endforelse
-                                
+
                             </tr>
                             @empty
                             <tr>
@@ -219,7 +251,7 @@
                                 @empty
                                 <td colspan="{{count($kriterias)}}" class="text-center">Tidak Ada Data</td>
                                 @endforelse
-                                
+
                             </tr>
                             @empty
                             <tr>
@@ -254,7 +286,7 @@
                                 @empty
                                 <td colspan="{{count($kriterias)}}" class="text-center">Tidak Ada Data</td>
                                 @endforelse
-                                
+
                             </tr>
                             @empty
                             <tr>
@@ -289,7 +321,7 @@
                                 @empty
                                 <td colspan="{{count($kriterias)}}" class="text-center">Tidak Ada Data</td>
                                 @endforelse
-                                
+
                             </tr>
                             @empty
                             <tr>

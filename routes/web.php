@@ -49,6 +49,7 @@ Route::group(['middleware' => 'auth'], function() {
             Route::resource('/petugas', OperatorController::class);
             Route::get('/mahasiswa', [OperatorController::class, 'mahasiswa'])->name('operator.mahasiswa');
             Route::get('/beasiswa', [OperatorController::class, 'beasiswa'])->name('operator.beasiswa');
+            Route::get('/detail-mahasiswa/{mahasiswa_id}', [OperatorController::class, 'detail'])->name('detailMhs');
             Route::get('/hasil', [MabacController::class, 'index'])->name('hasil.index');
             Route::resource('/kriteria', KriteriaController::class);
             Route::resource('/subkriteria', SubkriteriaController::class);

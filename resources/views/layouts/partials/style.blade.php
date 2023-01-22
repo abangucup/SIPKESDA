@@ -11,3 +11,9 @@
 <link rel="stylesheet" href="{{ asset('assets/css/app.css')}}">
 <link rel="shortcut icon" href="{{ asset('assets/images/favicon.svg')}}" type="image/x-icon">
 <link rel="stylesheet" href="{{ asset('assets/css/pages/error.css')}}">
+
+{{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.3.1/css/fixedHeader.dataTables.min.css"> --}}
+
+
+

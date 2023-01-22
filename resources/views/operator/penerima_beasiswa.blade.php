@@ -42,13 +42,13 @@
                     <tr>
                         <td>{{$mahasiswa->nama}}</td>
                         @forelse ($mahasiswa->subkriteria as $subkriteria)
-                        <td>{{$subkriteria->nilai}}</td>
+                        <td>{{$subkriteria->subkriteria}}</td>
                         @empty
                         <td colspan="{{count($kriterias)}}" class="text-center">Tidak Ada Data</td>
                         @endforelse
                         <td class="col-2">
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <button class="btn btn-outline-warning float-sm-start mb-2 me-4"
+                                {{-- <button class="btn btn-outline-warning float-sm-start mb-2 me-4"
                                     id="nav-kriteria-mahasiswa" data-bs-toggle="tab"
                                     data-bs-target="#nav-kriteriaMahasiswa" type="button" role="tab"
                                     aria-controls="nav-kriteriaMahasiswa" aria-selected="false">Edit</button>
@@ -56,8 +56,9 @@
                                     @method('DELETE')
                                     @csrf
                                     <button type="submit" onclick="return confirm('Are you sure?')"
-                                        class="btn btn-outline-danger">Delete</button>
-                                </form>
+                                        class="btn btn-outline-danger">Deti</button>
+                                </form> --}}
+                                <a href="{{route('detailMhs', $mahasiswa->id)}}" class="btn btn-outline-secondary">Detail</a>
                             </div>
                         </td>
                     </tr>

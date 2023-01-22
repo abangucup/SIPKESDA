@@ -42,7 +42,7 @@
                     <tr>
                         <td>{{$mahasiswa->nama}}</td>
                         @forelse ($mahasiswa->subkriteria as $subkriteria)
-                        <td>{{$subkriteria->nilai}}</td>
+                        <td>{{$subkriteria->subkriteria}}</td>
                         @empty
                         <td colspan="{{count($kriterias)}}" class="text-center">Tidak Ada Data</td>
                         @endforelse
