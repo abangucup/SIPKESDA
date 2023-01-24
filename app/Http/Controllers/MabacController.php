@@ -14,6 +14,9 @@ class MabacController extends Controller
         $kriterias = Kriteria::all();
         $mahasiswas = Mahasiswa::all();
 
+
+        $min = [];
+        $max = [];
         foreach ($kriterias as $kriteria) {
             $min_nilai = DB::table('subkriterias')
                 ->join('mahasiswa_subkriteria', 'subkriterias.id', '=', 'mahasiswa_subkriteria.subkriteria_id')
