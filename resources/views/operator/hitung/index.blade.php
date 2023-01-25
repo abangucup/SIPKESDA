@@ -146,42 +146,16 @@
                             <tr>
                                 <td>{{$mahasiswa->nama}}</td>
                                 @forelse ($mahasiswa->subkriteria as $subkriteria)
-                                @php
-                                $sub = $subkriteria->kriteria->kriteria;
-                                @endphp
-                                {{-- <td>{{($subkriteria->nilai - (float)$min[$sub]) / (float)$max[$sub] - (float)$min[$sub]}}</td> --}}
-                                @if ($subkriteria->kriteria->jenis == "benefit")
-                               
-                                @php
-                                $sub = $subkriteria->kriteria->kriteria;
-                                $normal = ($subkriteria->nilai - (float)$min[$sub]) / ((float)$max[$sub] - (float)$min[$sub])
-                                @endphp
-                                <td>{{$normal}}</td>
-
-                                @else
-
-                                @php
-                                $sub = $subkriteria->kriteria->kriteria;
-                                $normal = ($subkriteria->nilai - (float)$min[$sub]) / ((float)$max[$sub] - (float)$min[$sub])
-                                @endphp
-                                <td>{{$normal}}</td>
-
-                                @endif
-                                
-                                {{-- <td>{{$min[$sub]}}</td> --}}
-                                {{-- <td>{{ ($subkriteria->nilai - (float)$min[$sub]) / (float)$max[$sub] -
-                                    (float)$min[$sub]}} </td> --}}
-                                {{-- @if ($subkriteria->kriteria->jenis == "benefit")
-                                <td>{{ ($subkriteria->nilai - (float)$min[$sub]) / (float)$max[$sub] -
-                                    (float)$min[$sub]}}</td>
-                                @else
-                                <td>{{ ($subkriteria->nilai - (float)$max[$sub]) / (float)$max[$sub] -
-                                    (float)$min[$sub]}}</td>
-                                @endif --}}
+                                <td>{{$subkriteria->kriteria->jenis == "benefit" ? (($subkriteria->nilai -
+                                    (float)$min_ben[$subkriteria->kriteria->kriteria]) /
+                                    ((float)$max_ben[$subkriteria->kriteria->kriteria] -
+                                    (float)$min_ben[$subkriteria->kriteria->kriteria])) : (($subkriteria->nilai -
+                                    (float)$max_co[$subkriteria->kriteria->kriteria]) /
+                                    ((float)$max_co[$subkriteria->kriteria->kriteria] -
+                                    (float)$min_co[$subkriteria->kriteria->kriteria]))}}</td>
                                 @empty
                                 <td colspan="{{count($kriterias)}}" class="text-center">Tidak Ada Data</td>
                                 @endforelse
-
                             </tr>
                             @empty
                             <tr>
