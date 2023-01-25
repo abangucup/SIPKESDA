@@ -150,9 +150,8 @@
                                     (float)$min_ben[$subkriteria->kriteria->kriteria]) /
                                     ((float)$max_ben[$subkriteria->kriteria->kriteria] -
                                     (float)$min_ben[$subkriteria->kriteria->kriteria])) : (($subkriteria->nilai -
-                                    (float)$max_co[$subkriteria->kriteria->kriteria]) /
-                                    ((float)$max_co[$subkriteria->kriteria->kriteria] -
-                                    (float)$min_co[$subkriteria->kriteria->kriteria]))}}</td>
+                                    (float)$max_co[$subkriteria->kriteria->kriteria]) / (float)$min_co[$subkriteria->kriteria->kriteria] -
+                                    ((float)$max_co[$subkriteria->kriteria->kriteria]))}}</td>
                                 @empty
                                 <td colspan="{{count($kriterias)}}" class="text-center">Tidak Ada Data</td>
                                 @endforelse
@@ -186,7 +185,20 @@
                             <tr>
                                 <td>{{$mahasiswa->nama}}</td>
                                 @forelse ($mahasiswa->subkriteria as $subkriteria)
-                                <td>{{$subkriteria->nilai}}</td>
+                                <td>{{$subkriteria->kriteria->jenis == "benefit" ? 
+                                    (
+                                        // Nilai Normalisasi Awal
+                                        $subkriteria->kriteria->bobot *
+                                        (($subkriteria->nilai - (float)$min_ben[$subkriteria->kriteria->kriteria]) /
+                                        ((float)$max_ben[$subkriteria->kriteria->kriteria] - (float)$min_ben[$subkriteria->kriteria->kriteria]))
+                                    ) + 
+                                        $subkriteria->kriteria->bobot
+                                    : (
+                                        $subkriteria->kriteria->bobot *
+                                        (($subkriteria->nilai - (float)$max_co[$subkriteria->kriteria->kriteria]) /
+                                        ((float)$min_co[$subkriteria->kriteria->kriteria] - (float)$max_co[$subkriteria->kriteria->kriteria]))
+                                    ) + 
+                                        $subkriteria->kriteria->bobot }}</td>
                                 @empty
                                 <td colspan="{{count($kriterias)}}" class="text-center">Tidak Ada Data</td>
                                 @endforelse
