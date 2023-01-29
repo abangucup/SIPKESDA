@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'List Mahasiswa')
+@section('title', 'List Operator')
 
 @section('heading')
 <div class="page-title">

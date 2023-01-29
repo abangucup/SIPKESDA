@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('kriteria');
             $table->enum('jenis', ['benefit', 'cost']);
             $table->float('bobot');
+            $table->float('min')->nullable();
+            $table->float('max')->nullable();
+            $table->float('batasan', 8, 8)->nullable();
             $table->timestamps();
         });
     }

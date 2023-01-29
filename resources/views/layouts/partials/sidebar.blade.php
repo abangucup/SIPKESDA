@@ -93,6 +93,27 @@
                 @endif
 
                 @auth
+                <li class="sidebar-item {{Request::is('dashboard/laporan/*') ? 'active' : ''}} has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-file-earmark"></i>
+                        <span>Laporan</span>
+                    </a>
+                    <ul class="submenu {{Request::is('dashboard/laporan/*') ? 'active' : ''}}">
+
+                        @if (auth()->user()->role != 'mahasiswa')
+                        <li class="submenu-item {{Request::is('dashboard/laporan/penerima') ? 'active' : ''}}">
+                            <a href="{{route('laporan.penerima')}}">Data Mahasiswa</a>
+                        </li>
+                        <li class="submenu-item {{Request::is('dashboard/laporan/beasiswa') ? 'active' : ''}}">
+                            <a href="{{route('laporan.beasiswa')}}">Kriteria Beasiswa</a>
+                        </li>
+                        @endif
+
+                        <li class="submenu-item {{Request::is('dashboard/laporan/hasil') ? 'active' : ''}}">
+                            <a href="{{route('laporan.hasil')}}">Hasil Perhitungan</a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="sidebar-item">
                     <a href="{{ route('logout')}}" class='sidebar-link'>
                         <i class="bi bi-box-arrow-left"></i>

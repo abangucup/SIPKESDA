@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KriteriaController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MabacController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\OperatorController;
@@ -59,7 +60,15 @@ Route::group(['middleware' => 'auth'], function() {
         Route::group(['middleware' => ['role:kepala'], 'prefix' => 'kepala'], function () {
             Route::get('/', [DashboardController::class, 'kepala'])->name('dashboard_kepala');
         });
+
+        Route::get('/laporan/penerima', [LaporanController::class, 'penerima'])->name('laporan.penerima');
+        Route::get('/laporan/penerima/cetak', [LaporanController::class, 'cetakMahasiswa'])->name('cetak.mahasiswa');
+        Route::get('/laporan/beasiswa', [LaporanController::class, 'beasiswa'])->name('laporan.beasiswa');
+        Route::get('/laporan/beasiswa/cetak', [LaporanController::class, 'cetakBeasiswa'])->name('cetak.beasiswa');
+        Route::get('/laporan/hasil', [LaporanController::class, 'hasil'])->name('laporan.hasil');
+        Route::get('/laporan/hasil/cetak', [LaporanController::class, 'cetakHasil'])->name('cetak.hasil');
     });
+
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 

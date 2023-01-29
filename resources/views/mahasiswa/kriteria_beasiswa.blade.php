@@ -1,19 +1,19 @@
 @extends('layouts.app')
 
-@section('title', 'List Mahasiswa')
+@section('title', 'Data Beasiswa')
 
 @section('heading')
 <div class="page-title">
     <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>Kriteria Beasiswa</h3>
+            <h3>Pendataan Kriteria Beasiswa</h3>
             <p class="text-subtitle text-muted">Untuk Melihat Nilai Mahasiswa Berdasarkan Kriteria</p>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('dashboard_operator')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Kriteria Beasiswa</li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard_mahasiswa')}}">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Data Beasiswa</li>
                 </ol>
             </nav>
         </div>
@@ -93,8 +93,7 @@
                                             <select name="subkriteria_id[]"
                                                 class="form-select form-control form-control-lg">
                                                 @forelse ($kriteria->subkriteria as $subkriteria)
-
-                                                <option value="{{$subkriteria->id}}">{{$subkriteria->subkriteria}}
+                                                <option value="{{$subkriteria->id}}">{{$subkriteria->subkriteria}} - Nilai : ({{$subkriteria->nilai}})
                                                 </option>
                                                 @empty
                                                 <option value="#">Tidak Ada Subkriteria</option>

@@ -12,7 +12,7 @@ class Mahasiswa extends Model
     protected $fillable = [
         'nama', 'tempat_lahir', 'tanggal_lahir', 'jk', 'alamat', 
         'kampus', 'jurusan', 'prodi', 'no_hp', 'username', 'password',
-        'berkas',
+        'berkas', 'hasil',
     ];
 
     public function user()
@@ -23,6 +23,11 @@ class Mahasiswa extends Model
     public function subkriteria()
     {
         return $this->belongsToMany(Subkriteria::class, 'mahasiswa_subkriteria');
+    }
+
+    public function kriteria()
+    {
+        return $this->belongsToMany(Kriteria::class, 'kriteria_mahasiswa')->withPivot('normalisasi', 'tertimbang', 'jarak');
     }
     
 

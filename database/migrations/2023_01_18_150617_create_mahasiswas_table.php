@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->string('berkas')->nullable();
+            $table->float('hasil', 8,5)->nullable();
             $table->timestamps();
         });
     }

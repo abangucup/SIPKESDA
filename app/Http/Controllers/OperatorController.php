@@ -92,4 +92,5 @@ class OperatorController extends Controller
         Operator::destroy($id);
         return redirect()->route('petugas.index');
     }
+
 }

@@ -65,4 +65,47 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-12 col-xl-12">
+        <div class="card shadow">
+            <div class="card-header">
+                <h4>Pendaftar Terakhir</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover table-lg">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Mahasiswa</th>
+                                <th>Kampus</th>
+                                <th>Jurusan</th>
+                                <th>Prodi</th>
+                                <th>Tanggal Daftar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($mahasiswas as $mahasiswa)
+                            <tr>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$mahasiswa->nama}}</td>
+                                <td>{{$mahasiswa->kampus}}</td>
+                                <td>{{$mahasiswa->jurusan}}</td>
+                                <td>{{$mahasiswa->prodi}}</td>
+                                <td>{{$mahasiswa->created_at}}</td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="6" class="text-center">Belum Ada Pendaftar</td>
+                            </tr>
+                            @endforelse
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
