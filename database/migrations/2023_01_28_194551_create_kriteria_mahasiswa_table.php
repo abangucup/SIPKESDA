@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('kriteria_id')->constrained()->onDelete('cascade');
             $table->foreignId('mahasiswa_id')->constrained()->onDelete('cascade');
-            $table->float('normalisasi', 8, 8)->nullable();
-            $table->float('tertimbang', 8,8)->nullable();
+            $table->float('normalisasi', 8, 3)->nullable();
+            $table->float('tertimbang', 8,3)->nullable();
             $table->float('jarak', 8,8)->nullable();
             $table->timestamps();
         });

@@ -228,7 +228,7 @@
                     <table class="table table-striped" id="jarak_alternatif">
                         <thead>
                             <tr>
-                                <th class="col-2">Jarak</th>
+                                <th class="col-2">Nama Mahasiswa</th>
                                 @forelse ($kriterias as $kriteria)
                                 <th>{{$kriteria->kriteria}}</th>
                                 @empty
@@ -240,8 +240,8 @@
                             @forelse ($mahasiswas as $mahasiswa)
                             <tr>
                                 <td>{{$mahasiswa->nama}}</td>
-                                @forelse ($mahasiswa->subkriteria as $subkriteria)
-                                <td>{{$subkriteria->nilai}}</td>
+                                @forelse ($mahasiswa->kriteria as $kriteria)
+                                <td>{{$kriteria->pivot->jarak}}</td>
                                 @empty
                                 <td colspan="{{count($kriterias)}}" class="text-center">Tidak Ada Data</td>
                                 @endforelse
@@ -263,24 +263,19 @@
                     <table class="table table-striped" id="ranking_alternatif">
                         <thead>
                             <tr>
-                                <th class="col-2">Perengkingan</th>
-                                @forelse ($kriterias as $kriteria)
-                                <th>{{$kriteria->kriteria}}</th>
-                                @empty
-                                <th>Belum Ada Kriteria</th>
-                                @endforelse
+                                <th>No</th>
+                                <th>Nama Mahasiswa</th>
+                                <th>Hasil Capaian</th>
+                                <th>Rangking</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($mahasiswas as $mahasiswa)
+                            @forelse ($mahasiswas->sortByDesc('hasil') as $mahasiswa)
                             <tr>
+                                <td>{{$loop->iteration}}</td>
                                 <td>{{$mahasiswa->nama}}</td>
-                                @forelse ($mahasiswa->subkriteria as $subkriteria)
-                                <td>{{$subkriteria->nilai}}</td>
-                                @empty
-                                <td colspan="{{count($kriterias)}}" class="text-center">Tidak Ada Data</td>
-                                @endforelse
-
+                                <td>{{$mahasiswa->hasil}}</td>
+                                <td>{{$loop->iteration}}</td>
                             </tr>
                             @empty
                             <tr>
