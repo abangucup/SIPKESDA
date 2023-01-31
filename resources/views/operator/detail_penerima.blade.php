@@ -97,6 +97,12 @@
                                     </div>
                                 </div>
 
+                                <label for="first-name-icon">Berkas Pribadi</label>
+                                <div class="position-relative mb-3">
+                                    
+                                    <a href="{{$mahasiswa->berkas_pribadi != null ? asset('storage/mahasiswa/pribadi/'.$mahasiswa->berkas_pribadi) : '#'}}" class="btn btn-outline-secondary"><i class="bi bi-download pe-2"></i>Download</a>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -123,6 +129,11 @@
                                     <div class="form-control-icon">
                                         <i class="bi bi-check"></i>
                                     </div>
+                                </div>
+                                <label for="first-name-icon">Berkas Pribadi</label>
+                                <div class="position-relative mb-3">
+                                    
+                                    <a href="{{$mahasiswa->berkas_beasiswa != null ? asset('storage/mahasiswa/beasiswa/'.$mahasiswa->berkas_beasiswa) : '#'}}" class="btn btn-outline-secondary"><i class="bi bi-download pe-2"></i>Download</a>
                                 </div>
                                 @empty
                                 Kosong

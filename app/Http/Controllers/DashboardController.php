@@ -11,10 +11,12 @@ class DashboardController extends Controller
 {
     public function mahasiswa()
     {
+        $cek_berkas = Mahasiswa::where('id', auth()->user()->mahasiswa_id)->first();
+        // dd($cek_berkas);
         $kriterias = Kriteria::all();
         $subkriterias = Subkriteria::all();
         $mahasiswas = Mahasiswa::all()->sortByDesc('created_at');
-        return view('mahasiswa.dashboard', compact('mahasiswas', 'kriterias', 'subkriterias'));
+        return view('mahasiswa.dashboard', compact('mahasiswas', 'kriterias', 'subkriterias', 'cek_berkas'));
     }
 
     public function operator()

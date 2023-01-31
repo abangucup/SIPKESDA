@@ -8,10 +8,63 @@ use App\Models\Perhitungan;
 use App\Models\Subkriteria;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class MahasiswaController extends Controller
 {
+    public function berkasPribadi(Request $request)
+    {
+        $this->validate($request, [
+            'berkas_pribadi' => 'required|mimes:zip,rar',
+        ]);
+
+        // Mengambil file yang diupload
+        $filepribadi = $request->file('berkas_pribadi');
+        $namepribadi = time() . '.' . $filepribadi->getClientOriginalExtension();
+
+        // Menyimpan file ke folder yang telah ditentukan
+        $filepribadi->storeAs('mahasiswa/pribadi', $namepribadi, 'public');
+
+        // Mengambil file yang diupload
+        $filebeasiswa = $request->file('berkas_beasiswa');
+        $namebeasiswa = time() . '.' . $filebeasiswa->getClientOriginalExtension();
+
+        // Menyimpan file ke folder yang telah ditentukan
+        $filebeasiswa->storeAs('mahasiswa/beasiswa', $namebeasiswa, 'public');
+
+        // Menyimpan informasi file ke dalam database
+        Mahasiswa::where('id', auth()->user()->mahasiswa_id)->update([
+            'berkas_pribadi' => $namepribadi,
+            'berkas_beasiswa' => $namebeasiswa,
+        ]);
+
+        // Mengembalikan halaman dengan pesan sukses
+        return redirect()->back()->with('success', 'Berkas berhasil diupload');
+    }
+
+    public function berkasBeasiswa(Request $request)
+    {
+        $this->validate($request, [
+            'berkas_beasiswa' => 'required|mimes:zip,rar',
+        ]);
+
+        // Mengambil file yang diupload
+        $file = $request->file('berkas_beasiswa');
+        $filename = time() . '.' . $file->getClientOriginalExtension();
+
+        // Menyimpan file ke folder yang telah ditentukan
+        $file->storeAs('mahasiswa/beasiswa', $filename, 'public');
+
+        // Menyimpan informasi file ke dalam database
+        Mahasiswa::where('id', auth()->user()->mahasiswa_id)->update([
+            'berkas_beasiswa' => $filename,
+        ]);
+
+        // Mengembalikan halaman dengan pesan sukses
+        return redirect()->back()->with('success', 'Berkas berhasil diupload');
+    }
+
     public function beasiswa()
     {
         $kriterias = Kriteria::all();

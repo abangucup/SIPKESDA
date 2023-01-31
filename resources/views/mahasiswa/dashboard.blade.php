@@ -100,7 +100,6 @@
                                             <td colspan="6" class="text-center">Belum Ada Pendaftar</td>
                                         </tr>
                                         @endforelse
-                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -108,7 +107,8 @@
                     </div>
                 </div>
             </div>
-        </div>  
+        </div>
     </section>
 </div>
+
 @endsection

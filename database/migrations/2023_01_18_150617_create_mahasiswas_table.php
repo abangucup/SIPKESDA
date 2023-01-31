@@ -26,7 +26,8 @@ return new class extends Migration
             $table->string('no_hp');
             $table->string('username')->unique();
             $table->string('password');
-            $table->string('berkas')->nullable();
+            $table->string('berkas_pribadi')->nullable();
+            $table->string('berkas_beasiswa')->nullable();
             $table->float('hasil', 8,5)->nullable();
             $table->timestamps();
         });

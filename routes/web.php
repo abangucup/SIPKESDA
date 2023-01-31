@@ -42,6 +42,8 @@ Route::group(['middleware' => 'auth'], function() {
             Route::delete('/besiswa', [MahasiswaController::class, 'destroyBeasiswa'])->name('beasiswa.destroy');
             Route::delete('/beasiswa', [MahasiswaController::class, 'destroyBeasiswa'])->name('beasiswa.destroy');
             Route::get('/hasil', [MahasiswaController::class, 'hasil'])->name('hasilMahasiswa');
+            Route::post('/upload-data-pribadi', [MahasiswaController::class, 'berkasPribadi'])->name('berkas.pribadi');
+            Route::post('/upload-data-beasiswa', [MahasiswaController::class, 'berkasBeasiswa'])->name('berkas.beasiswa');
         });
 
         // Dasboard Operator
