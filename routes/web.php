@@ -56,6 +56,7 @@ Route::group(['middleware' => 'auth'], function() {
             Route::get('/hasil', [MabacController::class, 'index'])->name('hasil.index');
             Route::resource('/kriteria', KriteriaController::class);
             Route::resource('/subkriteria', SubkriteriaController::class);
+            Route::put('/reupload/{id}', [OperatorController::class, 'reupload'])->name('reupload');
         });
 
         // Dasboard Kepala Bagian

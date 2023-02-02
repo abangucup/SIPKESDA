@@ -19,28 +19,27 @@ class MahasiswaController extends Controller
             'berkas_pribadi' => 'required|mimes:zip,rar',
         ]);
 
-        // Mengambil file yang diupload
+        //upload berkas pribadi
         $filepribadi = $request->file('berkas_pribadi');
         $namepribadi = time() . '.' . $filepribadi->getClientOriginalExtension();
-
-        // Menyimpan file ke folder yang telah ditentukan
         $filepribadi->storeAs('mahasiswa/pribadi', $namepribadi, 'public');
 
-        // Mengambil file yang diupload
-        $filebeasiswa = $request->file('berkas_beasiswa');
-        $namebeasiswa = time() . '.' . $filebeasiswa->getClientOriginalExtension();
+        if($request->berkas_beasiswa != null) {
 
-        // Menyimpan file ke folder yang telah ditentukan
-        $filebeasiswa->storeAs('mahasiswa/beasiswa', $namebeasiswa, 'public');
-
-        // Menyimpan informasi file ke dalam database
+            // upload berkas beasiswa
+            $filebeasiswa = $request->file('berkas_beasiswa');
+            $namebeasiswa = time() . '.' . $filebeasiswa->getClientOriginalExtension();
+            $filebeasiswa->storeAs('mahasiswa/beasiswa', $namebeasiswa, 'public');
+            
+            Mahasiswa::where('id', auth()->user()->mahasiswa_id)->update([
+                'berkas_pribadi' => $namepribadi,
+                'berkas_beasiswa' => $namebeasiswa,
+            ]);
+        }
         Mahasiswa::where('id', auth()->user()->mahasiswa_id)->update([
             'berkas_pribadi' => $namepribadi,
-            'berkas_beasiswa' => $namebeasiswa,
         ]);
-
-        // Mengembalikan halaman dengan pesan sukses
-        return redirect()->back()->with('success', 'Berkas berhasil diupload');
+        return redirect()->back();
     }
 
     public function berkasBeasiswa(Request $request)
@@ -49,20 +48,14 @@ class MahasiswaController extends Controller
             'berkas_beasiswa' => 'required|mimes:zip,rar',
         ]);
 
-        // Mengambil file yang diupload
         $file = $request->file('berkas_beasiswa');
         $filename = time() . '.' . $file->getClientOriginalExtension();
-
-        // Menyimpan file ke folder yang telah ditentukan
         $file->storeAs('mahasiswa/beasiswa', $filename, 'public');
-
-        // Menyimpan informasi file ke dalam database
         Mahasiswa::where('id', auth()->user()->mahasiswa_id)->update([
             'berkas_beasiswa' => $filename,
         ]);
 
-        // Mengembalikan halaman dengan pesan sukses
-        return redirect()->back()->with('success', 'Berkas berhasil diupload');
+        return redirect()->back();
     }
 
     public function beasiswa()
@@ -102,11 +95,4 @@ class MahasiswaController extends Controller
         return view('mahasiswa.hasil', compact('mahasiswas', 'kriterias'));
     }
 
-    public function index()
-    {
-    }
-
-    public function create()
-    {
-    }
 }

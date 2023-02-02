@@ -8,7 +8,9 @@ use App\Models\Operator;
 use App\Models\Subkriteria;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class OperatorController extends Controller
 {
@@ -17,6 +19,19 @@ class OperatorController extends Controller
         $kriterias = Kriteria::all();
         $mahasiswas = Mahasiswa::all();
         return view('operator.penerima_beasiswa', compact('mahasiswas', 'kriterias'));
+    }
+
+    public function reupload($id)
+    {
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        $file = public_path('storage/mahasiswa/beasiswa/'.$mahasiswa->berkas_beasiswa);
+        
+        if (File::exists($file)) {
+            File::delete($file);
+            $mahasiswa->berkas_beasiswa = null;
+            $mahasiswa->save();
+        }
+        return redirect()->back();
     }
 
     public function detail($mahasiswa_id)
