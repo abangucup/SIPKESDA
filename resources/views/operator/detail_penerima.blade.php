@@ -133,7 +133,7 @@
                                         <i class="bi bi-check"></i>
                                     </div>
                                 </div>
-                                <label for="first-name-icon">Berkas Pribadi</label>
+                                <label for="first-name-icon">Berkas Beasiswa</label>
                                 <div class="position-relative mb-3">
                                     <a href="{{$mahasiswa->berkas_beasiswa != null ? asset('storage/mahasiswa/beasiswa/'.$mahasiswa->berkas_beasiswa) : '#'}}"
                                         class="btn btn-outline-secondary"><i
