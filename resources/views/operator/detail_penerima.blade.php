@@ -149,8 +149,6 @@
                                 @empty
                                 Kosong
                                 @endforelse
-
-
                             </div>
                         </div>
                     </div>
