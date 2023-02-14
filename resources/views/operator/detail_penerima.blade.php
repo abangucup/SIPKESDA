@@ -106,6 +106,13 @@
                                             class="bi bi-download pe-2"></i>Download</a>
 
                                 </div>
+                                <div class="position-relative mb-3">
+                                    <form action="{{route('reupload-pribadi', $mahasiswa->id)}}" method="POST">
+                                        @method('PUT')
+                                        @csrf
+                                        <button type="submit" class="btn btn-outline-danger"><i class="bi bi-bootstrap-reboot"></i> Reupload</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -133,22 +140,26 @@
                                         <i class="bi bi-check"></i>
                                     </div>
                                 </div>
+                                
+                               
+                                @empty
+                                Kosong
+                                @endforelse
+                                @if($mahasiswa->subkriteria->isNotEmpty())
                                 <label for="first-name-icon">Berkas Beasiswa</label>
                                 <div class="position-relative mb-3">
                                     <a href="{{$mahasiswa->berkas_beasiswa != null ? asset('storage/mahasiswa/beasiswa/'.$mahasiswa->berkas_beasiswa) : '#'}}"
                                         class="btn btn-outline-secondary"><i
                                             class="bi bi-download pe-2"></i>Download</a>
                                 </div>
-                                <div class="position-relative mb-3">
+                                 <div class="position-relative mb-3">
                                     <form action="{{route('reupload', $mahasiswa->id)}}" method="POST">
                                         @method('PUT')
                                         @csrf
                                         <button type="submit" class="btn btn-outline-danger"><i class="bi bi-bootstrap-reboot"></i> Reupload</button>
                                     </form>
                                 </div>
-                                @empty
-                                Kosong
-                                @endforelse
+                                @endif
                             </div>
                         </div>
                     </div>

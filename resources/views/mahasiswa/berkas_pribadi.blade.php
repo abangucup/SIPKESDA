@@ -18,6 +18,16 @@
                                 Surat Aktif Kuliah, Surat Permohonan Bantuan Studi,
                                 Proposal/Skripsi, Fotocopy Buku Rekening)</sub> </span>
                     </div>
+                    @if($mahasiswa->berkas_beasiswa == null)
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Berkas Beasiswa</label>
+                        <input class="form-control" type="file" id="formFile" name="berkas_beasiswa" required>
+                        <span class="text-secondary"><sub>*.zip/rar
+                                (@foreach ($kriterias as $kriteria)
+                                {{$kriteria->kriteria}},
+                                @endforeach)</sub> </span>
+                    </div>
+                    @endif
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Upload</button>

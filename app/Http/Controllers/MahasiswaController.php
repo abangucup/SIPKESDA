@@ -15,6 +15,7 @@ class MahasiswaController extends Controller
 {
     public function berkasPribadi(Request $request)
     {
+        // dd($request->all());
         $this->validate($request, [
             'berkas_pribadi' => 'required|mimes:zip,rar',
         ]);

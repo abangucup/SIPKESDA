@@ -33,6 +33,18 @@ class OperatorController extends Controller
         }
         return redirect()->back();
     }
+    public function reuploadDataPribadi($id)
+    {
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        $file = public_path('storage/mahasiswa/pribadi/'.$mahasiswa->berkas_pribadi);
+        
+        if (File::exists($file)) {
+            File::delete($file);
+            $mahasiswa->berkas_pribadi = null;
+            $mahasiswa->save();
+        }
+        return redirect()->back();
+    }
 
     public function detail($mahasiswa_id)
     {

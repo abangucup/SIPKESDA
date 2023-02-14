@@ -52,10 +52,7 @@
                         <td class="col-2">
                             @if ($mahasiswa->berkas_pribadi == null)
                             {{-- UPLOAD BERKAS PRIBADI JIKA BERKAS PRIBADI KOSONG --}}
-                            <button type="button" class="btn btn-outline-info" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop">
-                                Tambah Kriteria
-                            </button>
+                            <div></div>
                             @include('mahasiswa.berkas_pribadi')
 
                             {{-- JIKA TIDAK KOSONG --}}
@@ -96,7 +93,27 @@
             </table>
             @include('mahasiswa.tambah_kriteria')
             @include('mahasiswa.edit_kriteria')
+
+            <div>
+            <!-- BUTTON  UPLOAD BERKAS PNDUKUN BEASISWA-->
+            @if ($mahasiswa->berkas_beasiswa == null)
+            <!-- Button Upload Berkas Beasiswa-->
+            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#berkasBeasiswa">
+                <i class="bi bi-upload pe-2"></i>
+                UPLOAD BERKAS BEASISWA
+            </button>
             @include('mahasiswa.berkas_beasiswa')
+            @endif
+        </div>
+            @if ($mahasiswa->berkas_pribadi == null)
+                {{-- UPLOAD BERKAS PRIBADI JIKA BERKAS PRIBADI KOSONG --}}
+                <button type="button" class="btn btn-outline-info" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">
+                    <i class="bi bi-upload pe-2"></i>
+                    UPLOAD ULANG BERKAS PRIBADI
+                </button>
+                @include('mahasiswa.berkas_pribadi')
+            @endif
         </div>
     </div>
 </section>

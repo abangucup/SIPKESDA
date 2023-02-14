@@ -57,6 +57,7 @@ Route::group(['middleware' => 'auth'], function() {
             Route::resource('/kriteria', KriteriaController::class);
             Route::resource('/subkriteria', SubkriteriaController::class);
             Route::put('/reupload/{id}', [OperatorController::class, 'reupload'])->name('reupload');
+            Route::put('/reupload-pribadi/{id}', [OperatorController::class, 'reuploadDataPribadi'])->name('reupload-pribadi');
         });
 
         // Dasboard Kepala Bagian
