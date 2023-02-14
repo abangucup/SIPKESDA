@@ -44,6 +44,7 @@
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
+                        <th>Email</th>
                         <th>Username</th>
                         <th>Role</th>
                         <th>Aksi</th>
@@ -54,6 +55,7 @@
                     <tr>
                         <td>{{$loop->iteration}}</td>
                         <td>{{$operator->nama}}</td>
+                        <td>{{ $operator->email }}</td>
                         <td>{{$operator->username}}</td>
                         <td>{{$operator->role}}</td>
                         <td class="col-sm-2">

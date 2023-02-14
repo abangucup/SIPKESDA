@@ -10,9 +10,82 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class MahasiswaController extends Controller
 {
+    // UPDATE PROFILE ATAU BIODATA MAHASISWA
+    public function updateBiodata(Request $request, $mahasiswa_id)
+    {
+        $mahasiswa = Mahasiswa::where('id', $mahasiswa_id);
+
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required',
+            'nik' => 'required|unique:mahasiswas',
+            'email' => 'required|unique:mahasiswas',
+            'username' => 'required|unique:mahasiswas',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'jk' => 'required',
+            'alamat' => 'required',
+            'kampus' => 'required',
+            'jurusan' => 'required',
+            'no_hp' => 'required',
+        ]);
+
+        $username = Mahasiswa::where('username', $request->username)->where('id', '!=', $mahasiswa_id)->first();
+        $nik = Mahasiswa::where('nik', $request->nik)->where('id', '!=', $mahasiswa_id)->first();
+        $email = Mahasiswa::where('email', $request->email)->where('id', '!=', $mahasiswa_id)->first();
+
+        if ($nik || $email || $username) {
+            if ($validator->fails()) {
+                toast('Email atau Username atau NIK sudah ada', 'info');
+                return back();
+            }
+        }
+
+        if ($request->password != null) {
+            $mahasiswa->update([
+                'nama' => $request->nama,
+                'nik' => $request->nik,
+                'email' => $request->email,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'username' => $request->username,
+                'password' => Hash::make($request->password),
+                'jk' => $request->jk,
+                'alamat' => $request->alamat,
+                'kampus' => $request->kampus,
+                'jurusan' => $request->jurusan,
+                'no_hp' => $request->no_hp,
+            ]);
+
+            $user = User::where('mahasiswa_id', $mahasiswa_id)->first();
+            $user->update([
+                'username' => $request->username,
+                'password' => Hash::make($request->password),
+            ]);
+        } else {
+            $mahasiswa->update([
+                'nama' => $request->nama,
+                'nik' => $request->nik,
+                'email' => $request->email,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'username' => $request->username,
+                'jk' => $request->jk,
+                'alamat' => $request->alamat,
+                'kampus' => $request->kampus,
+                'jurusan' => $request->jurusan,
+                'no_hp' => $request->no_hp,
+            ]);
+        }
+
+        toast('Berhasil Update Biodata', 'success');
+        return redirect()->back();
+    }
+
     public function berkasPribadi(Request $request)
     {
         // dd($request->all());
@@ -31,7 +104,7 @@ class MahasiswaController extends Controller
             $filebeasiswa = $request->file('berkas_beasiswa');
             $namebeasiswa = time() . '.' . $filebeasiswa->getClientOriginalExtension();
             $filebeasiswa->storeAs('mahasiswa/beasiswa', $namebeasiswa, 'public');
-            
+
             Mahasiswa::where('id', auth()->user()->mahasiswa_id)->update([
                 'berkas_pribadi' => $namepribadi,
                 'berkas_beasiswa' => $namebeasiswa,

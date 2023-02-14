@@ -11,6 +11,7 @@
 
 <body>
 
+    @include('sweetalert::alert')
     <div id="app">
 
         @include('layouts.partials.sidebar')

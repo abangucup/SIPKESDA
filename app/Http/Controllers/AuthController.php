@@ -7,6 +7,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+// use RealRashid\SweetAlert\Facades\Alert;
+use Alert;
 
 class AuthController extends Controller
 {
@@ -44,8 +47,10 @@ class AuthController extends Controller
 
     public function storeRegister(Request $request)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'nama' => 'required',
+            'email' => 'required|unique:mahasiswas',
+            'nik' => 'required|unique:mahasiswas',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
             'jk' => 'required',
@@ -57,13 +62,20 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
+        $email = Mahasiswa::where('email', $request->email)->first();
+        $nik = Mahasiswa::where('nik', $request->nik)->first();
         $username = Mahasiswa::where('username', $request->username)->first();
-        if($username) {
-            return back();
+        if($username || $nik || $email) {
+            if($validator->fails()) {
+                toast('Email atau Username atau NIK sudah Ada', 'info');
+                return back();
+            }
         }
 
         $mahasiswa = new Mahasiswa();
         $mahasiswa->nama = $request->nama;
+        $mahasiswa->email = $request->email;
+        $mahasiswa->nik = $request->nik;
         $mahasiswa->tempat_lahir = $request->tempat_lahir;
         $mahasiswa->tanggal_lahir = $request->input('tanggal_lahir');
         $mahasiswa->jk = $request->jk;
@@ -92,7 +104,7 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        
+
         return redirect()->route('home');
     }
 }

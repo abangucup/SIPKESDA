@@ -16,6 +16,10 @@
                     <div class="form-group">
                         <input type="text" placeholder="Nama Operator" class="form-control" name="nama" value="{{old('nama', $operator->nama)}}" required>
                     </div>
+                    <label>Email: </label>
+                    <div class="form-group">
+                        <input type="email" placeholder="Email" class="form-control" name="email" value="{{old('email', $operator->email)}}" required>
+                    </div>
                     <label>Username: </label>
                     <div class="form-group">
                         <input type="text" placeholder="Username" class="form-control" name="username" value="{{old('username', $operator->username)}}" required>

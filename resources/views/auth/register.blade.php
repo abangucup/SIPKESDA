@@ -13,6 +13,7 @@
 </head>
 
 <body>
+    @include('sweetalert::alert')
     <div id="auth">
 
         <div class="row h-100">
@@ -42,6 +43,15 @@
                                     </div>
                                 </div>
 
+                                <h6>NIK</h6>
+                                <div class="form-group position-relative has-icon-left mb-3">
+                                    <input type="text" class="form-control form-control-lg" placeholder="Nomor Induk Kependudukan"
+                                        name="nik" required>
+                                    <div class="form-control-icon">
+                                        <i class="bi bi-person"></i>
+                                    </div>
+                                </div>
+
                                 <h6>Tempat Lahir</h6>
                                 <div class="form-group position-relative has-icon-left mb-3">
                                     <input type="text" class="form-control form-control-lg" placeholder="Tempat Lahir"
@@ -62,7 +72,7 @@
 
                                 <h6>Jenis Kelamin</h6>
                                 <div class="form-group position-relative has-icon-left mb-3">
-                                    <select name="jk" class="form-select form-control form-control-lg">
+                                    <select name="jk" class="form-control form-control form-control-lg">
                                         <option value="pria">Pria</option>
                                         <option value="wanita">Wanita</option>
                                     </select>
@@ -118,6 +128,15 @@
                                     </div>
                                 </div>
 
+                                <h6>Email</h6>
+                                <div class="form-group position-relative has-icon-left mb-3">
+                                    <input type="email" class="form-control form-control-lg" placeholder="Email"
+                                        name="email" required>
+                                    <div class="form-control-icon">
+                                        <i class="bi bi-person"></i>
+                                    </div>
+                                </div>
+
                                 <h6>Username</h6>
                                 <div class="form-group position-relative has-icon-left mb-3">
                                     <input type="text" class="form-control form-control-lg" placeholder="Username"
@@ -129,7 +148,8 @@
 
                                 <h6>Password</h6>
                                 <div class="form-group position-relative has-icon-left mb-3">
-                                    <input type="password" class="form-control form-control-lg" placeholder="Password" name="password" required>
+                                    <input type="password" class="form-control form-control-lg" placeholder="Password"
+                                        name="password" required>
                                     <div class="form-control-icon">
                                         <i class="bi bi-shield-lock"></i>
                                     </div>

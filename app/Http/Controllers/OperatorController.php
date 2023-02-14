@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class OperatorController extends Controller
 {
@@ -24,8 +25,8 @@ class OperatorController extends Controller
     public function reupload($id)
     {
         $mahasiswa = Mahasiswa::findOrFail($id);
-        $file = public_path('storage/mahasiswa/beasiswa/'.$mahasiswa->berkas_beasiswa);
-        
+        $file = public_path('storage/mahasiswa/beasiswa/' . $mahasiswa->berkas_beasiswa);
+
         if (File::exists($file)) {
             File::delete($file);
             $mahasiswa->berkas_beasiswa = null;
@@ -36,8 +37,8 @@ class OperatorController extends Controller
     public function reuploadDataPribadi($id)
     {
         $mahasiswa = Mahasiswa::findOrFail($id);
-        $file = public_path('storage/mahasiswa/pribadi/'.$mahasiswa->berkas_pribadi);
-        
+        $file = public_path('storage/mahasiswa/pribadi/' . $mahasiswa->berkas_pribadi);
+
         if (File::exists($file)) {
             File::delete($file);
             $mahasiswa->berkas_pribadi = null;
@@ -67,20 +68,26 @@ class OperatorController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'nama' => 'required',
-            'username' => 'required|unique:operators',
+            'email' => 'required|unique:operators',
+            'username' => 'required|unique:users',
             'password' => 'required',
             'role' => 'required'
         ]);
 
-        $username = Operator::where('username', $request->username)->first();
-        if ($username) {
-            return back();
+        $email = Operator::where('email', $request->email)->first();
+        $username = User::where('username', $request->username)->first();
+        if ($username || $email) {
+            if ($validator->fails()) {
+                toast('Email atau Username sudah Ada', 'info');
+                return back();
+            }
         }
 
         $operator = new Operator();
         $operator->nama = $request->nama;
+        $operator->email = $request->email;
         $operator->username = $request->username;
         $operator->password = Hash::make($request->password);
         $operator->role = $request->role;
@@ -99,18 +106,30 @@ class OperatorController extends Controller
 
     public function update(Request $request, $id)
     {
+        // $validator = Validator::make($request->all(), [
+        //     'username'
+        // ])
         $petugas = Operator::findOrFail($id);
-        $petugas->update($request->all());
-
-        $cek = User::all()->find('operator_id', $petugas->id);
-        if($cek == $petugas->id){
-            User::where('operator_id', $petugas->id)->update([
-                'username' => $request->username,
-                'password' => Hash::make($request->password),
-                'role' => $request->role,
-            ]);
+        $username = Operator::where('username', $request->username)->where('id', '!=', $petugas->id)->first();
+        if ($username) {
+            toast('Username Sudah Ada', 'info');
+            return back();
         }
+        $petugas->update([
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'no_hp' => $request->no_hp,
+        ]);
 
+        $user = User::where('operator_id', $petugas->id)->first();
+        $user->update([
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+        ]);
+
+        toast('Berhasil Update Data', 'success');
         return back();
     }
 
@@ -119,5 +138,4 @@ class OperatorController extends Controller
         Operator::destroy($id);
         return redirect()->route('petugas.index');
     }
-
 }

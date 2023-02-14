@@ -11,7 +11,7 @@ use App\Http\Controllers\SubkriteriaController;
 use Illuminate\Support\Facades\Route;
 
 
-// Halaman Awal 
+// Halaman Awal
 Route::get('/', function() {
     return view('home');
 })->name('home');
@@ -59,6 +59,7 @@ Route::group(['middleware' => 'auth'], function() {
             Route::put('/reupload/{id}', [OperatorController::class, 'reupload'])->name('reupload');
             Route::put('/reupload-pribadi/{id}', [OperatorController::class, 'reuploadDataPribadi'])->name('reupload-pribadi');
         });
+        Route::put('/update/biodata/{mahasiswa_id}', [MahasiswaController::class, 'updateBiodata'])->name('update.biodata');
 
         // Dasboard Kepala Bagian
         Route::group(['middleware' => ['role:kepala'], 'prefix' => 'kepala'], function () {

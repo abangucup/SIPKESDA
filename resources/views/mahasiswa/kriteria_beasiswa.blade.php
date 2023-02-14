@@ -25,6 +25,7 @@
 <section class="section">
     <div class="card">
         <div class="card-body shadow">
+            <button class="btn btn-outline-warning mb-4" data-bs-toggle="modal" data-bs-target="#updateBiodataMhs-{{ auth()->user()->mahasiswa_id }}">Update Biodata</button>
             <table class="table table-striped" id="tabel_mahasiswa">
                 <thead>
                     <tr>
@@ -62,7 +63,7 @@
                                     id="nav-tambah-kriteria-mahasiswa" data-bs-toggle="tab"
                                     data-bs-target="#nav-tambahKriteriaMahasiswa" type="button" role="tab"
                                     aria-controls="nav-tambahKriteriaMahasiswa" aria-selected="false">Tambah</button>
-                                
+
 
                             </div>
                             @endif
@@ -77,7 +78,7 @@
                                     role="tab" aria-controls="nav-editKriteriaMahasiswa"
                                     aria-selected="false">Edit</button>
 
-                                
+
 
                                 <form action="{{route('beasiswa.destroy', $mahasiswa->id)}}" method="POST">
                                     @method('DELETE')
@@ -117,4 +118,6 @@
         </div>
     </div>
 </section>
+
+@include('operator.modal_update_biodata_mhs')
 @endsection
