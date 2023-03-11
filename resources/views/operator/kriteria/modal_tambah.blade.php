@@ -13,10 +13,7 @@
                 <div class="modal-body">
                     <label>Kode: </label>
                     <div class="form-group">
-                        @php
-                            $i = 0;
-                        @endphp
-                        <input type="text" placeholder="Kode Kriteria" class="form-control" name="kode" value="C{{ $i+1 }}" readonly>
+                        <input type="text" placeholder="Kode Kriteria" class="form-control" name="kode" value="C{{ count($kriterias)+1 }}" readonly>
                     </div>
                     <label>Kriteria: </label>
                     <div class="form-group">

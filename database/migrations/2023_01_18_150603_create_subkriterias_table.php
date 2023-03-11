@@ -14,8 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('subkriterias', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('kriteria_id')->constrained()->onDelete('cascade');
+            $table->increments('id');
+            // $table->foreignId('kriteria_id')->constrained();
+            $table->integer('kriteria_id')->unsigned();
+            $table->foreign('kriteria_id')->references('id')->on('kriterias')->onDelete('cascade');
             $table->string('subkriteria');
             $table->float('nilai');
             $table->timestamps();

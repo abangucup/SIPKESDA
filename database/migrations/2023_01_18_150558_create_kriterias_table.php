@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('kriterias', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('kode');
             $table->string('kriteria');
             $table->enum('jenis', ['benefit', 'cost']);
