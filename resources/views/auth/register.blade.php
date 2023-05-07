@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIPKESDA</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css')}}">
-    <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/app.css')}}">
     <link rel="stylesheet" href="{{ asset('assets/css/pages/auth.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-icons/bootstrap-icons.css')}}">
 </head>
 
 <body>
@@ -45,8 +45,8 @@
 
                                 <h6>NIK</h6>
                                 <div class="form-group position-relative has-icon-left mb-3">
-                                    <input type="text" class="form-control form-control-lg" placeholder="Nomor Induk Kependudukan"
-                                        name="nik" required>
+                                    <input type="text" class="form-control form-control-lg"
+                                        placeholder="Nomor Induk Kependudukan" name="nik" required>
                                     <div class="form-control-icon">
                                         <i class="bi bi-person"></i>
                                     </div>
@@ -161,7 +161,7 @@
 
                     <div class="auth-left">
                         <div class="text-center mt-5 text-lg fs-4">
-                            <p class="text-gray-600">Sudah Punya Akun? <a href="{{route('login')}}"
+                            <p class="text-gray-600">Sudah Punya Akun? <a href="{{route('home')}}"
                                     class="font-bold">Login</a>.</p>
                             <p><a class="font-bold" href="{{route('home')}}">Kembali Halaman Utama</a>.</p>
                         </div>

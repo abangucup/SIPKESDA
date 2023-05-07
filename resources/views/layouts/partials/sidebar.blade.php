@@ -24,6 +24,13 @@
                     </a>
                 </li>
 
+                <li class="sidebar-item {{Request::is('dashboard/operator/informasi') ? 'active' : ''}}">
+                    <a href="{{ route('informasi.index')}}" class='sidebar-link'>
+                        <i class="bi bi-person-badge"></i>
+                        <span>Informasi</span>
+                    </a>
+                </li>
+
                 <li class="sidebar-item {{Request::is('dashboard/operator/petugas') ? 'active' : ''}}">
                     <a href="{{ route('petugas.index')}}" class='sidebar-link'>
                         <i class="bi bi-person-badge"></i>

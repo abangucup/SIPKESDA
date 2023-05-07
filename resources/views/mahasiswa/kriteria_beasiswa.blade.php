@@ -111,7 +111,7 @@
                 <button type="button" class="btn btn-outline-info" data-bs-toggle="modal"
                     data-bs-target="#staticBackdrop">
                     <i class="bi bi-upload pe-2"></i>
-                    UPLOAD ULANG BERKAS PRIBADI
+                    UPLOAD BERKAS PRIBADI
                 </button>
                 @include('mahasiswa.berkas_pribadi')
             @endif

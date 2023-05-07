@@ -2,22 +2,25 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\KriteriaController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MabacController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\SubkriteriaController;
+use App\Models\Informasi;
 use Illuminate\Support\Facades\Route;
 
 
 // Halaman Awal
-Route::get('/', function() {
-    return view('home');
+Route::get('/', function () {
+    $informasis = Informasi::all();
+    return view('home', compact('informasis'));
 })->name('home');
 
 // Batasan akses tamu
-Route::middleware(['guest'])->group(function() {
+Route::middleware(['guest'])->group(function () {
     // Halaman Login
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'storeLogin']);
@@ -28,13 +31,13 @@ Route::middleware(['guest'])->group(function() {
 });
 
 // Harus Auth dulu
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => 'auth'], function () {
 
     // Halaman Dashboard
-    Route::prefix('dashboard')->group(function(){
+    Route::prefix('dashboard')->group(function () {
 
         // Dashboard Mahasiswa
-        Route::group(['middleware' => ['role:mahasiswa'], 'prefix' => 'mahasiswa'],function () {
+        Route::group(['middleware' => ['role:mahasiswa'], 'prefix' => 'mahasiswa'], function () {
             Route::get('/', [DashboardController::class, 'mahasiswa'])->name('dashboard_mahasiswa');
             Route::get('/beasiswa', [MahasiswaController::class, 'beasiswa'])->name('beasiswa');
             Route::post('/beasiswa', [MahasiswaController::class, 'storeBeasiswa'])->name('beasiswa.store');
@@ -47,8 +50,9 @@ Route::group(['middleware' => 'auth'], function() {
         });
 
         // Dasboard Operator
-        Route::group(['middleware' => ['role:operator'], 'prefix' => 'operator'],function () {
+        Route::group(['middleware' => ['role:operator'], 'prefix' => 'operator'], function () {
             Route::get('/', [DashboardController::class, 'operator'])->name('dashboard_operator');
+            Route::resource('/informasi', InformasiController::class);
             Route::resource('/petugas', OperatorController::class);
             Route::get('/mahasiswa', [OperatorController::class, 'mahasiswa'])->name('operator.mahasiswa');
             Route::get('/beasiswa', [OperatorController::class, 'beasiswa'])->name('operator.beasiswa');
@@ -76,5 +80,4 @@ Route::group(['middleware' => 'auth'], function() {
 
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-
 });

@@ -25,19 +25,18 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        if(Auth::attempt($validasi)){
+        if (Auth::attempt($validasi)) {
             $user = auth()->user()->role;
             if ($user == 'operator') {
                 return redirect()->route('dashboard_operator');
             } elseif ($user == 'mahasiswa') {
                 return redirect()->route('dashboard_mahasiswa');
-            }else {
+            } else {
                 return redirect()->route('dashboard_kepala');
             }
         }
 
         return back()->with('status', 'Username Atau Password Salah');
-
     }
 
     public function register()
@@ -65,8 +64,8 @@ class AuthController extends Controller
         $email = Mahasiswa::where('email', $request->email)->first();
         $nik = Mahasiswa::where('nik', $request->nik)->first();
         $username = Mahasiswa::where('username', $request->username)->first();
-        if($username || $nik || $email) {
-            if($validator->fails()) {
+        if ($username || $nik || $email) {
+            if ($validator->fails()) {
                 toast('Email atau Username atau NIK sudah Ada', 'info');
                 return back();
             }
