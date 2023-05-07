@@ -48,11 +48,12 @@
                 <tbody>
                     @foreach ($informasis as $informasi)
                     <tr>
+                        <td>{{ $loop->iteration }}</td>
                         <td>{{ $informasi->judul }}</td>
-                        <td>{{ $informasi->deskripsi }}</td>
+                        <td>{!! $informasi->deskripsi !!}</td>
                         <td>
-                            <a href="{{ route('informasi.edit') }}">Edit</a>
-                            <a href="{{ route('informasi.destroy') }}">Delete</a>
+                            {{-- <a href="{{ route('informasi.edit') }}">Edit</a>
+                            <a href="{{ route('informasi.destroy') }}">Delete</a> --}}
                         </td>
                     </tr>
                     @endforeach

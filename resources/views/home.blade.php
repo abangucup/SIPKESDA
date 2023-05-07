@@ -98,7 +98,7 @@
                                 <i class="bi bi-info-circle-fill me-1 fs-3"></i>
                             </div>
                             <div class="p-2 w-100 bd-highlight">
-                                Informasi Waktu Penginputan Kegiatan Ormawa Dan Mahasiswa
+                                Informasi Penerimaan Beasiswa Daerah
                             </div>
                         </h2>
                         @forelse ($informasis as $informasi)
@@ -112,11 +112,11 @@
                                                 class="bi bi-calendar-x-fill h-100 w-100 d-flex  align-items-center justify-content-center"></i>
                                         </div>
                                         <div>
-                                            <h6 class="text-extrabold">
+                                            <h1 class="text-extrabold text-secondary">
                                                 {{ $informasi->judul }}
-                                            </h6>
+                                            </h1>
                                             <p class="font-muted mb-0">
-                                                {{ $informasi->deskripsi }}
+                                                {!! $informasi->deskripsi !!}
                                             </p>
                                         </div>
                                     </div>

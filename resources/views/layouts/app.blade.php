@@ -8,6 +8,7 @@
 <title>@yield('title')</title>
 
 @include('layouts.partials.style')
+@stack('style')
 
 <body>
 
@@ -28,6 +29,7 @@
     </div>
 
     @include('layouts.partials.script')
+    @stack('script')
 
 </body>
 

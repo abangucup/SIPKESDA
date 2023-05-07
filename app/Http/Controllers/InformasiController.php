@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Informasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class InformasiController extends Controller
 {
@@ -20,7 +21,17 @@ class InformasiController extends Controller
 
     public function store(Request $request)
     {
-        // return view('operator.informasi.')
+        $validate = $request->validate([
+            'judul' => 'required',
+            'deskripsi' => 'required'
+        ]);
+
+        $informasi  = new Informasi();
+        $informasi->judul = $validate['judul'];
+        $informasi->deskripsi = $validate['deskripsi'];
+        $informasi->save();
+
+        return redirect()->route('informasi.index')->with('success', 'informasi berhasil ditambahkan');
     }
 
     public function edit()

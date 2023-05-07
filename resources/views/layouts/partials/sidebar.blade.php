@@ -26,7 +26,8 @@
 
                 <li class="sidebar-item {{Request::is('dashboard/operator/informasi') ? 'active' : ''}}">
                     <a href="{{ route('informasi.index')}}" class='sidebar-link'>
-                        <i class="bi bi-person-badge"></i>
+                        {{-- <i class="bi bi-person-badge"></i> --}}
+                        <i class="bi bi-info-circle-fill"></i>
                         <span>Informasi</span>
                     </a>
                 </li>

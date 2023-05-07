@@ -22,49 +22,65 @@
 @endsection
 
 @section('content')
-<section class="section">
-    <div class="card">
-        <form action="{{route('petugas.store')}}" method="POST">
-            @csrf
-            <div class="modal-body">
-                <label>Nama Opeator: </label>
-                <div class="form-group">
-                    <input type="text" placeholder="Nama Operator" class="form-control" name="nama" required>
-                </div>
-                <label>Email: </label>
-                <div class="form-group">
-                    <input type="email" placeholder="Email" class="form-control" name="email" required>
-                </div>
-                <label>Username: </label>
-                <div class="form-group">
-                    <input type="text" placeholder="Username" class="form-control" name="username" required>
-                </div>
-                <label>Password: </label>
-                <div class="form-group">
-                    <input type="password" placeholder="Password" class="form-control" name="password" required>
-                </div>
-                <label>No HP / WA: </label>
-                <div class="form-group">
-                    <input type="text" placeholder="Nomor HP" class="form-control" name="no_hp">
-                </div>
-                <label>Role: </label>
-                <div class="form-group">
-                    <select name="role" class="form-select">
-                        <option value="operator">Operator</option>
-                        <option value="kepala">Kepala Bagian</option>
-                    </select>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                    <i class="bx bx-x d-block d-sm-none"></i>
-                    <span class="d-none d-sm-block">Close</span>
-                </button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
-            </div>
-        </form>
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card border-0 shadow rounded">
+                <div class="card-body">
+                    <form action="{{ route('informasi.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-group">
+                            <label class="font-weight-bold">Judul Berita</label>
+                            <input type="text" class="form-control @error('judul') is-invalid @enderror" name="judul"
+                                value="{{ old('judul') }}" placeholder="Masukan judul" required>
 
+                            <!-- error message untuk title -->
+                            @error('judul')
+                            <div class="alert alert-danger mt-2">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label class="font-weight-bold">Deskripsi</label>
+                            <textarea id="summernote" class="form-control" name="deskripsi" rows="4"
+                                placeholder="Masukan Isi Berita" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-md btn-primary">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-
-</section>
+</div>
 @endsection
+
+@push('style')
+<link rel="stylesheet" href="{{ asset('assets/vendors/summernote/summernote-lite.min.css') }}">
+
+@endpush
+
+@push('script')
+<script src="{{ asset('assets/vendors/jquery/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/summernote/summernote-lite.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        $('#summernote').summernote({
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+            ],
+            height: 300
+            , placeholder: 'Harap Masukan Isi Berita'
+            , insertText: 'Hello World'
+
+        });
+    });
+
+</script>
+@endpush
