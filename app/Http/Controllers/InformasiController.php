@@ -34,16 +34,32 @@ class InformasiController extends Controller
         return redirect()->route('informasi.index')->with('success', 'informasi berhasil ditambahkan');
     }
 
-    public function edit()
+    public function edit($id)
     {
-        return view('operator.informasi.edit');
+        $informasi = Informasi::findOrFail($id);
+        return view('operator.informasi.edit', compact('informasi'));
     }
 
     public function update(Request $request, $id)
     {
+        $informasi = Informasi::findOrFail($id);
+        $validate = $request->validate([
+            'judul' => 'required',
+            'deskripsi' => 'required'
+        ]);
+
+        $informasi->update([
+            'judul' => $validate['judul'],
+            'deskripsi' => $validate['deskripsi'],
+        ]);
+
+        return redirect()->route('informasi.index')->with('success', 'berhasil ubah data');
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
+        $informasi = Informasi::findOrFail($id);
+        $informasi->delete();
+        return back();
     }
 }

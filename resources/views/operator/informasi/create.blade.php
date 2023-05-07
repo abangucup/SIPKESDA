@@ -6,14 +6,15 @@
 <div class="page-title">
     <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>Informasi</h3>
+            <h3>Tambah Informasi</h3>
             <p class="text-subtitle text-muted">Data informasi kepada penerima beasiswa</p>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard_operator')}}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Informasi</li>
+                    <li class="breadcrumb-item"><a href="{{ route('informasi.index')}}">Informasi</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Tambah Informasi</li>
                 </ol>
             </nav>
         </div>
@@ -47,7 +48,7 @@
                             <textarea id="summernote" class="form-control" name="deskripsi" rows="4"
                                 placeholder="Masukan Isi Berita" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-md btn-primary">Simpan</button>
+                        <button type="submit" class="btn btn-md btn-primary">Simpan Informasi</button>
                     </form>
                 </div>
             </div>
@@ -71,7 +72,6 @@
                 ['style', ['style']],
                 ['font', ['bold', 'underline', 'clear']],
                 ['fontname', ['fontname']],
-                ['color', ['color']],
                 ['para', ['ul', 'ol', 'paragraph']],
                 ['table', ['table']],
             ],

@@ -30,8 +30,6 @@
                         href="{{ route('informasi.create') }}" type="button" class="btn btn-outline-primary">
                         Tambah Informasi
                     </a>
-
-                    {{-- @include('operator.modal_tambah') --}}
                 </nav>
             </div>
         </div>
@@ -42,6 +40,7 @@
                         <th>No</th>
                         <th>Judul</th>
                         <th>Deskripsi</th>
+                        <th>Dibuat</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -50,35 +49,25 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $informasi->judul }}</td>
-                        <td>{!! $informasi->deskripsi !!}</td>
+                        <td>{!! Str::limit($informasi->deskripsi, $limit = 20, $end = '...') !!}</td>
+                        <td>{{ \Carbon\Carbon::parse($informasi->created_at)->format('\T\a\n\g\g\a\l d F Y, \J\a\m
+                            H:i')}}
+                        </td>
                         <td>
-                            {{-- <a href="{{ route('informasi.edit') }}">Edit</a>
-                            <a href="{{ route('informasi.destroy') }}">Delete</a> --}}
+                            <a href="{{ route('informasi.edit', $informasi->id) }}"
+                                class="btn btn-sm btn-warning my-2"><i class="bi bi-pencil-square"></i></a>
+
+                            <form id="form-delete-{{ $informasi->id }}"
+                                action="{{ route('informasi.destroy', $informasi->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                            </form>
+                            <a href="#" class="btn btn-sm btn-danger"
+                                onclick="document.getElementById('form-delete-{{ $informasi->id }}').submit();"><i
+                                    class="bi bi-trash-fill my-2"></i></a>
                         </td>
                     </tr>
                     @endforeach
-                    {{-- @forelse ($mahasiswas as $mahasiswa)
-                    <tr>
-                        <td>{{$loop->iteration}}</td>
-                        <td>{{$mahasiswa->nama}}</td>
-                        <td>{{ $mahasiswa->nik }}</td>
-                        <td>{{$mahasiswa->username}}</td>
-                        <td>{{$mahasiswa->alamat}}</td>
-                        <td>{{$mahasiswa->no_hp}}</td>
-                        <td>{{$mahasiswa->kampus}}</td>
-                        <td>{{$mahasiswa->jurusan}}</td>
-                        <td>{{$mahasiswa->prodi}}</td>
-                        <td>
-                            <button class="btn btn-warning" data-bs-toggle="modal"
-                                data-bs-target="#updateBiodataMhs-{{ $mahasiswa->id }}">Update</button>
-                        </td>
-                    </tr>
-                    @include('operator.modal_update_biodata_mhs')
-                    @empty
-                    <tr>
-                        <td colspan="8" class="text-center">Belum Ada Mahasiswa Yang Mendaftar</td>
-                    </tr>
-                    @endforelse --}}
                 </tbody>
             </table>
         </div>
