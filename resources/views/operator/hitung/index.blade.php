@@ -50,9 +50,13 @@
                     data-bs-target="#nav-jarakAlternatif" type="button" role="tab" aria-controls="nav-jarakAlternatif"
                     aria-selected="false">Jarak Alternatif</button>
 
+                {{-- <button class="nav-link me-3" id="nav-ranking-alternatif" data-bs-toggle="tab"
+                    data-bs-target="#nav-rankingAlternatif" type="button" role="tab"
+                    aria-controls="nav-rankingAlternatif" aria-selected="false">Perengkingan</button> --}}
+
                 <button class="nav-link me-3" id="nav-ranking-alternatif" data-bs-toggle="tab"
                     data-bs-target="#nav-rankingAlternatif" type="button" role="tab"
-                    aria-controls="nav-rankingAlternatif" aria-selected="false">Perengkingan</button>
+                    aria-controls="nav-rankingAlternatif" aria-selected="false">Status</button>
 
             </div>
 
@@ -251,6 +255,7 @@
                             <tr>
                                 <td class="text-center">Belum Ada Ada</td>
                             </tr>
+
                             @endforelse
                         </tbody>
                     </table>
@@ -266,7 +271,7 @@
                                 <th>No</th>
                                 <th>Nama Mahasiswa</th>
                                 <th>Hasil Capaian</th>
-                                <th>Rangking</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -275,7 +280,7 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$mahasiswa->nama}}</td>
                                 <td>{{$mahasiswa->hasil}}</td>
-                                <td>{{$loop->iteration}}</td>
+                                <td>Lulus</td>
                             </tr>
                             @empty
                             <tr>

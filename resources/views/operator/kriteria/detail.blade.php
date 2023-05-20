@@ -52,7 +52,7 @@
                                     </div>
                                 </div>
 
-                                <label for="first-name-icon">Kode Kriteria</label>
+                                <label for="first-name-icon">Bobot Kriteria</label>
                                 <div class="position-relative mb-3">
                                     <input type="text" class="form-control" placeholder="{{$kriteria->bobot}}" disabled
                                         id="first-name-icon">
@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
 
-                                <label for="first-name-icon">Kode Kriteria</label>
+                                <label for="first-name-icon">Jenis Kriteria</label>
                                 <div class="position-relative mb-3">
                                     <input type="text" class="form-control" placeholder="{{$kriteria->jenis}}" disabled
                                         id="first-name-icon">

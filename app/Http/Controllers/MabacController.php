@@ -6,6 +6,7 @@ use App\Models\Kriteria;
 use App\Models\Mahasiswa;
 use App\Models\Perhitungan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 use function PHPUnit\Framework\isEmpty;
@@ -15,7 +16,9 @@ class MabacController extends Controller
     public function index()
     {
         $kriterias = Kriteria::all();
-        $mahasiswas = Mahasiswa::all();
+        // $mahasiswas = Mahasiswa::all();
+        // Mahasiswa pada tahun ini
+        $mahasiswas = Mahasiswa::whereYear('created_at', Carbon::now()->year)->get();
 
         // melakukan perulangan untuk mendapatkan data per mahasiswa
         foreach ($mahasiswas as $mahasiswa) {
@@ -34,7 +37,7 @@ class MabacController extends Controller
                     ->where('kriterias.id', $kriteria->id)
                     ->max('subkriterias.nilai');
 
-                // Update table kriteria untuk menambahkan data minimal dan maksimal kedalam tabel kriteria 
+                // Update table kriteria untuk menambahkan data minimal dan maksimal kedalam tabel kriteria
                 Kriteria::where('id', $kriteria->id)->update([
                     'min' => $mininmal,
                     'max' => $maksimal,
