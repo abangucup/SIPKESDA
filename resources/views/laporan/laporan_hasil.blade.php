@@ -26,8 +26,8 @@
 <section class="section">
     <div class="card">
         <div class="card-header">
-            <a class="btn btn-outline-primary" href="{{route('cetak.hasil')}}"><i
-                    class="bi bi-file-earmark-fill"></i> Cetak PDF</a>
+            <a class="btn btn-outline-primary" href="{{route('cetak.hasil')}}"><i class="bi bi-file-earmark-fill"></i>
+                Cetak PDF</a>
         </div>
         <div class="card-body shadow">
             <div class="nav nav-tabs col-lg-12 d-flex justify-content-center" id="nav-tab" role="tablist">
@@ -263,6 +263,7 @@
                 {{-- END JARAK ALTERNATIF --}}
 
                 {{-- CONTENT PERENGKINGAN --}}
+                {{-- CONTENT PERENGKINGAN --}}
                 <div class="tab-pane fade" id="nav-rankingAlternatif" role="tabpanel"
                     aria-labelledby="nav-ranking-alternatif">
                     <table class="table table-striped" id="ranking_alternatif">
@@ -271,25 +272,24 @@
                                 <th>No</th>
                                 <th>Nama Mahasiswa</th>
                                 <th>Hasil Capaian</th>
-                                <th>Rangking</th>
+                                <th>Status Berkas</th>
+                                <th>Status Beasiswa</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($mahasiswas->sortByDesc('hasil') as $mahasiswa)
+                            @foreach ($mahasiswas as $mahasiswa)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$mahasiswa->nama}}</td>
                                 <td>{{$mahasiswa->hasil}}</td>
-                                <td>{{$loop->iteration}}</td>
+                                <td>{{ $mahasiswa->status_berkas }}</td>
+                                <td>{{ $mahasiswa->status_beasiswa }}</td>
                             </tr>
-                            @empty
-                            <tr>
-                                <td class="text-center">Belum Ada Ada</td>
-                            </tr>
-                            @endforelse
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
+                {{-- END PERENGKINGAN --}}
                 {{-- END PERENGKINGAN --}}
             </div>
         </div>

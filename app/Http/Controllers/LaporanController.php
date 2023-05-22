@@ -27,7 +27,6 @@ class LaporanController extends Controller
         $kriterias = Kriteria::all();
         $mahasiswas = Mahasiswa::all();
         return view('laporan.laporan_kriteria_beasiswa', compact('mahasiswas', 'kriterias'));
-
     }
 
     public function cetakBeasiswa()
@@ -36,16 +35,14 @@ class LaporanController extends Controller
         $mahasiswas = Mahasiswa::all();
         $pdf = PDF::loadView('laporan.cetak_kriteria_beasiswa', compact('mahasiswas', 'kriterias'));
         return $pdf->download('laporan_kriteria_penerima_beasiswa.pdf');
-
     }
 
     public function hasil()
     {
 
         $kriterias = Kriteria::all();
-        $mahasiswas = Mahasiswa::all();
+        $mahasiswas = Mahasiswa::get()->sortByDesc('hasil');
         return view('laporan.laporan_hasil', compact('mahasiswas', 'kriterias'));
-
     }
 
     public function cetakHasil()
@@ -54,6 +51,5 @@ class LaporanController extends Controller
         $kriterias = Kriteria::all();
         $pdf = PDF::loadView('laporan.cetak_hasil', compact('mahasiswas', 'kriterias'));
         return $pdf->download('laporan_hasil_capaian_penerima_beasiswa.pdf');
-
     }
 }

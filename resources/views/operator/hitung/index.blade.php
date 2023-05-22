@@ -271,22 +271,20 @@
                                 <th>No</th>
                                 <th>Nama Mahasiswa</th>
                                 <th>Hasil Capaian</th>
-                                <th>Status</th>
+                                <th>Status Berkas</th>
+                                <th>Status Beasiswa</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($mahasiswas->sortByDesc('hasil') as $mahasiswa)
+                            @foreach ($mahasiswas as $mahasiswa)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$mahasiswa->nama}}</td>
                                 <td>{{$mahasiswa->hasil}}</td>
-                                <td>Lulus</td>
+                                <td>{{ $mahasiswa->status_berkas }}</td>
+                                <td>{{ $mahasiswa->status_beasiswa }}</td>
                             </tr>
-                            @empty
-                            <tr>
-                                <td class="text-center">Belum Ada Ada</td>
-                            </tr>
-                            @endforelse
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

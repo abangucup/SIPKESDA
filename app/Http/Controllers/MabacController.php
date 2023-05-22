@@ -18,7 +18,7 @@ class MabacController extends Controller
         $kriterias = Kriteria::all();
         // $mahasiswas = Mahasiswa::all();
         // Mahasiswa pada tahun ini
-        $mahasiswas = Mahasiswa::whereYear('created_at', Carbon::now()->year)->get();
+        $mahasiswas = Mahasiswa::whereYear('created_at', Carbon::now()->year)->get()->sortByDesc('hasil');
 
         // melakukan perulangan untuk mendapatkan data per mahasiswa
         foreach ($mahasiswas as $mahasiswa) {
@@ -98,6 +98,21 @@ class MabacController extends Controller
                     'hasil' => $hasil,
                 ]);
             }
+        }
+
+        // Update Status Beasiswa
+        $count = 0;
+        foreach ($mahasiswas as $mahasiswa) {
+            if ($count < 5) {
+                $mahasiswa->status_berkas = 'diterima';
+                $mahasiswa->status_beasiswa = 'lulus';
+            } else {
+                $mahasiswa->status_berkas = 'diterima';
+                $mahasiswa->status_beasiswa = 'tidak lulus';
+            }
+            $mahasiswa->save();
+
+            $count++;
         }
 
         return view('operator.hitung.index', compact('mahasiswas', 'kriterias'));
