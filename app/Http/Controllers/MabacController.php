@@ -16,9 +16,9 @@ class MabacController extends Controller
     public function index()
     {
         $kriterias = Kriteria::all();
-        $mahasiswas = Mahasiswa::all();
+        // $mahasiswas = Mahasiswa::all();
         // Mahasiswa pada tahun ini
-        // $mahasiswas = Mahasiswa::whereYear('created_at', Carbon::now()->year)->get();
+        $mahasiswas = Mahasiswa::whereYear('created_at', Carbon::now()->year)->get();
 
         // melakukan perulangan untuk mendapatkan data per mahasiswa
         foreach ($mahasiswas as $mahasiswa) {

@@ -188,4 +188,25 @@ class OperatorController extends Controller
 
         return redirect()->back()->with('error', 'Failed to create compressed file.');
     }
+
+    // Filter Data Pertahun
+    public function filter(Request $request)
+    {
+        if ($request->tahun == 'all') {
+            // $mahasiswa = Mahasiswa::all();
+            return redirect()->route('operator.mahasiswa');
+        }
+
+        $mahasiswas = Mahasiswa::whereYear('created_at', $request->tahun)->get();
+
+        return view('operator.list_mahasiswa', compact('mahasiswas'));
+    }
+
+    public function hapus()
+    {
+        $tahun = request()->input('tahun');
+        Mahasiswa::whereYear('created_at', $tahun)->delete();
+
+        return redirect()->route('operator.mahasiswa')->with('success', 'Data mahasiswa yang difilter berhasil dihapus.');
+    }
 }

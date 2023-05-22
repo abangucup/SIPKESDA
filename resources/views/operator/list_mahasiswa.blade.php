@@ -24,6 +24,39 @@
 @section('content')
 <section class="section">
     <div class="card">
+        <div class="card-header d-flex">
+            <form action="{{ route('filter-mahasiswa') }}" method="post" class="d-flex me-2">
+                <div class="form-group me-2">
+                    @csrf
+                    <select name="tahun" class="form-control">
+                        <option value="all">Semua Tahun</option>
+                        @php
+                        $currentYear = date('Y');
+                        $startYear = 2018; // Tahun awal yang diinginkan
+                        @endphp
+                        @for ($year = $currentYear; $year >= $startYear; $year--)
+                        <option value="{{ $year }}">{{ $year }}</option>
+                        @endfor
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </form>
+
+            <div class="ms-auto">
+
+                <form id="delete-form" action="{{ route('hapus-mahasiswa') }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" name="tahun" value="{{ request()->input('tahun') }}">
+                </form>
+
+                <a href="#" class="btn btn-outline-danger"
+                    onclick="event.preventDefault(); document.getElementById('delete-form').submit();">Hapus Data</a>
+            </div>
+
+        </div>
         <div class="card-body shadow">
             <table class="table table-striped" id="tabel_mahasiswa">
                 <thead>
@@ -53,7 +86,8 @@
                         <td>{{$mahasiswa->jurusan}}</td>
                         <td>{{$mahasiswa->prodi}}</td>
                         <td>
-                            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateBiodataMhs-{{ $mahasiswa->id }}">Update</button>
+                            <button class="btn btn-warning" data-bs-toggle="modal"
+                                data-bs-target="#updateBiodataMhs-{{ $mahasiswa->id }}">Update</button>
                         </td>
                     </tr>
                     @include('operator.modal_update_biodata_mhs')
@@ -64,6 +98,7 @@
                     @endforelse
                 </tbody>
             </table>
+
         </div>
     </div>
 

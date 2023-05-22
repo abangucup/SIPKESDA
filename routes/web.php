@@ -60,12 +60,18 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/hasil', [MabacController::class, 'index'])->name('hasil.index');
             Route::resource('/kriteria', KriteriaController::class);
             Route::resource('/subkriteria', SubkriteriaController::class);
-            Route::put('/reupload/{id}', [OperatorController::class, 'reupload'])->name('reupload');
-            Route::put('/reupload-pribadi/{id}', [OperatorController::class, 'reuploadDataPribadi'])->name('reupload-pribadi');
+            // Route::put('/reupload/{id}', [OperatorController::class, 'reupload'])->name('reupload');
+            // Route::put('/reupload-pribadi/{id}', [OperatorController::class, 'reuploadDataPribadi'])->name('reupload-pribadi');
 
             // downlaod berkas terkompres
             Route::get('/download-berkas/{mahasiswa_id}', [OperatorController::class, 'download'])->name('download-berkas');
+
+            // Filter Mahasiswa Pertahun
+            Route::post('filter-mahasiswa', [OperatorController::class, 'filter'])->name('filter-mahasiswa');
+            // Hapus Data
+            Route::delete('hapus-mahasiswa', [OperatorController::class, 'hapus'])->name('hapus-mahasiswa');
         });
+
         Route::put('/update/biodata/{mahasiswa_id}', [MahasiswaController::class, 'updateBiodata'])->name('update.biodata');
 
         // Dasboard Kepala Bagian
