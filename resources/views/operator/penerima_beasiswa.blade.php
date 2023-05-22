@@ -28,6 +28,7 @@
             <table class="table table-striped" id="tabel_mahasiswa">
                 <thead>
                     <tr>
+                        <th>ID Mahasiswa</th>
                         <th class="col-2">Nama</th>
                         @forelse ($kriterias as $kriteria)
                         <th>{{$kriteria->kriteria}}</th>
@@ -40,6 +41,7 @@
                 <tbody>
                     @forelse ($mahasiswas as $mahasiswa)
                     <tr>
+                        <td>{{ $mahasiswa->id }}</td>
                         <td>{{$mahasiswa->nama}}</td>
                         @forelse ($mahasiswa->subkriteria as $subkriteria)
                         <td>{{$subkriteria->subkriteria}}</td>

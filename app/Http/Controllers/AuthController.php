@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 // use RealRashid\SweetAlert\Facades\Alert;
 use Alert;
+use App\Models\BerkasPribadi;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -97,6 +99,58 @@ class AuthController extends Controller
         Auth::login($user);
 
         // return redirect()->intended('dashboard_mahasiswa');
+        // return redirect()->route('dashboard_mahasiswa');
+        return redirect()->route('upload');
+    }
+
+    public function upload()
+    {
+        return view('auth.upload_berkas');
+    }
+
+    public function storeBerkas(Request $request)
+    {
+        $id_mhs = auth()->user()->mahasiswa_id;
+
+        $this->validate($request, [
+            'surat_permohonan' => 'required|file|mimes:pdf',
+            'surat_keterangan_selesai_proposal' => 'required|file|mimes:pdf',
+            'rekening_aktif' => 'required|file|mimes:pdf',
+            'ktp' => 'required|file|mimes:pdf',
+            'kk' => 'required|file|mimes:pdf',
+            'ktm' => 'required|file|mimes:pdf',
+            'transkip_nilai' => 'required|file|mimes:pdf',
+            'pernyataan_asn' => 'required|file|mimes:pdf',
+            'surat_aktif_kuliah' => 'required|file|mimes:pdf',
+            'surat_keterangan_bebas_beasiswa' => 'required|file|mimes:pdf',
+        ]);
+
+        // SIMPAN FILE
+        $surat_permohonan = $request->file('surat_permohonan')->store('public/berkas');
+        $surat_keterangan_selesai_proposal = $request->file('surat_keterangan_selesai_proposal')->store('public/berkas');
+        $rekening_aktif = $request->file('rekening_aktif')->store('public/berkas');
+        $ktp = $request->file('ktp')->store('public/berkas');
+        $kk = $request->file('kk')->store('public/berkas');
+        $ktm = $request->file('ktm')->store('public/berkas');
+        $transkip_nilai = $request->file('transkip_nilai')->store('public/berkas');
+        $pernyataan_asn = $request->file('pernyataan_asn')->store('public/berkas');
+        $surat_aktif_kuliah = $request->file('surat_aktif_kuliah')->store('public/berkas');
+        $surat_keterangan_bebas_beasiswa = $request->file('surat_keterangan_bebas_beasiswa')->store('public/berkas');
+
+        BerkasPribadi::create([
+            'mahasiswa_id' => $id_mhs,
+            'surat_permohonan' => asset(Storage::url($surat_permohonan)),
+            'surat_keterangan_selesai_proposal' =>  asset(Storage::url($surat_keterangan_selesai_proposal)),
+            'rekening_aktif' => asset(Storage::url($rekening_aktif)),
+            'ktp' => asset(Storage::url($ktp)),
+            'kk' => asset(Storage::url($kk)),
+            'ktm' => asset(Storage::url($ktm)),
+            'transkip_nilai' => asset(Storage::url($transkip_nilai)),
+            'pernyataan_asn' => asset(Storage::url($pernyataan_asn)),
+            'surat_aktif_kuliah' => asset(Storage::url($surat_aktif_kuliah)),
+            'surat_keterangan_bebas_beasiswa' => asset(Storage::url($surat_keterangan_bebas_beasiswa)),
+        ]);
+
         return redirect()->route('dashboard_mahasiswa');
     }
 

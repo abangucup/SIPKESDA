@@ -10,9 +10,9 @@ class Mahasiswa extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama', 'tempat_lahir', 'tanggal_lahir', 'jk', 'alamat', 
+        'nama', 'nik', 'email', 'tempat_lahir', 'tanggal_lahir', 'jk', 'alamat',
         'kampus', 'jurusan', 'prodi', 'no_hp', 'username', 'password',
-        'berkas', 'hasil',
+        'hasil', 'status_berkas', 'status_beasiswa'
     ];
 
     public function user()
@@ -29,6 +29,9 @@ class Mahasiswa extends Model
     {
         return $this->belongsToMany(Kriteria::class, 'kriteria_mahasiswa')->withPivot('normalisasi', 'tertimbang', 'jarak');
     }
-    
 
+    public function berkas()
+    {
+        return $this->hasOne(BerkasPribadi::class);
+    }
 }

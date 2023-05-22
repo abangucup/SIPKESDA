@@ -98,22 +98,6 @@
                                         <i class="bi bi-check"></i>
                                     </div>
                                 </div>
-
-                                <label for="first-name-icon">Berkas Pribadi</label>
-                                {{-- <div class="position-relative mb-3">
-                                    <a href="{{$mahasiswa->berkas_pribadi != null ? asset('storage/mahasiswa/pribadi/'.$mahasiswa->berkas_pribadi) : '#'}}"
-                                        class="btn btn-outline-secondary"><i
-                                            class="bi bi-download pe-2"></i>Download</a>
-
-                                </div> --}}
-                                {{-- <div class="position-relative mb-3">
-                                    <form action="{{route('reupload-pribadi', $mahasiswa->id)}}" method="POST">
-                                        @method('PUT')
-                                        @csrf
-                                        <button type="submit" class="btn btn-outline-danger"><i
-                                                class="bi bi-bootstrap-reboot"></i> Reupload</button>
-                                    </form>
-                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -122,6 +106,7 @@
         </div>
     </div>
 
+    {{-- Detail Kriteria Beasiswa --}}
     <div class="col-12 col-xl-6">
         <div class="card">
             <div class="card-header">
@@ -144,22 +129,113 @@
                                 @empty
                                 Kosong
                                 @endforelse
-                                {{-- @if($mahasiswa->subkriteria->isNotEmpty())
-                                <label for="first-name-icon">Berkas Beasiswa</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Berkas Beasiswa --}}
+    <div class="col-12 col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="float-start">Berkas {{$mahasiswa->nama}}</h4>
+                {{-- @if($mahasiswa->status_berkas != null)
+                <button class="btn btn-warning float-end me-4"><i class="bi bi-check-circle pe-2"></i>
+                    Verifikasi</button>
+                @else --}}
+                {{-- <button class="btn btn-secondary float-end me-4"><i class="bi bi-download pe-2"></i>
+                    Download</button> --}}
+                <a href="{{ route('download-berkas', $mahasiswa->id) }}" class="btn btn-secondary float-end me-4"><i
+                        class="bi bi-download pe-2"></i> Download</a>
+            </div>
+            <div class="card-body shadow">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group has-icon-left">
+                                <label for="first-name-icon">Surat Permohonan Bantuan Studi</label>
                                 <div class="position-relative mb-3">
-                                    <a href="{{$mahasiswa->berkas_beasiswa != null ? asset('storage/mahasiswa/beasiswa/'.$mahasiswa->berkas_beasiswa) : '#'}}"
-                                        class="btn btn-outline-secondary"><i
-                                            class="bi bi-download pe-2"></i>Download</a>
+                                    <iframe
+                                        src="{{ asset('assets/pdf.js/web/viewer.html?file=') }}{{ $mahasiswa->berkas->surat_permohonan ?? ''}}"
+                                        width="100%" height="400px"></iframe>
                                 </div>
+                            </div>
+                            <div class="form-group has-icon-left">
+                                <label for="first-name-icon">Surat Keterangan Selesai Proposal Skripsi</label>
                                 <div class="position-relative mb-3">
-                                    <form action="{{route('reupload', $mahasiswa->id)}}" method="POST">
-                                        @method('PUT')
-                                        @csrf
-                                        <button type="submit" class="btn btn-outline-danger"><i
-                                                class="bi bi-bootstrap-reboot"></i> Reupload</button>
-                                    </form>
+                                    <iframe
+                                        src="{{ asset('assets/pdf.js/web/viewer.html?file=') }}{{ $mahasiswa->berkas->surat_keterangan_selesai_proposal ?? ''}}"
+                                        width="100%" height="400px"></iframe>
                                 </div>
-                                @endif --}}
+                            </div>
+                            <div class="form-group has-icon-left">
+                                <label for="first-name-icon">Transkip Nilai</label>
+                                <div class="position-relative mb-3">
+                                    <iframe
+                                        src="{{ asset('assets/pdf.js/web/viewer.html?file=') }}{{ $mahasiswa->berkas->transkip_nilai ?? '' }}"
+                                        width="100%" height="400px"></iframe>
+                                </div>
+                            </div>
+                            <div class="form-group has-icon-left">
+                                <label for="first-name-icon">Kartu Tanda Mahasiswa</label>
+                                <div class="position-relative mb-3">
+                                    <iframe
+                                        src="{{ asset('assets/pdf.js/web/viewer.html?file=') }}{{ $mahasiswa->berkas->ktm ?? ''}}"
+                                        width="100%" height="400px"></iframe>
+                                </div>
+                            </div>
+                            <div class="form-group has-icon-left">
+                                <label for="first-name-icon">Kartu Tanda Penduduk</label>
+                                <div class="position-relative mb-3">
+                                    <iframe
+                                        src="{{ asset('assets/pdf.js/web/viewer.html?file=') }}{{ $mahasiswa->berkas->ktp ?? ''}}"
+                                        width="100%" height="400px"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group has-icon-left">
+                                <label for="first-name-icon">Kartu Keluarga</label>
+                                <div class="position-relative mb-3">
+                                    <iframe
+                                        src="{{ asset('assets/pdf.js/web/viewer.html?file=') }}{{ $mahasiswa->berkas->kk ?? ''}}"
+                                        width="100%" height="400px"></iframe>
+                                </div>
+                            </div>
+                            <div class="form-group has-icon-left">
+                                <label for="first-name-icon">Buku Tabungan</label>
+                                <div class="position-relative mb-3">
+                                    <iframe
+                                        src="{{ asset('assets/pdf.js/web/viewer.html?file=') }}{{ $mahasiswa->berkas->rekening_aktif ?? ''}}"
+                                        width="100%" height="400px"></iframe>
+                                </div>
+                            </div>
+                            <div class="form-group has-icon-left">
+                                <label for="first-name-icon">Surat Keterangan Aktif Kuliah</label>
+                                <div class="position-relative mb-3">
+                                    <iframe
+                                        src="{{ asset('assets/pdf.js/web/viewer.html?file=') }}{{ $mahasiswa->berkas->surat_aktif_kuliah ?? ''}}"
+                                        width="100%" height="400px"></iframe>
+                                </div>
+                            </div>
+                            <div class="form-group has-icon-left">
+                                <label for="first-name-icon">Surat Keterangan Bebas Beasiswa</label>
+                                <div class="position-relative mb-3">
+                                    <iframe
+                                        src="{{ asset('assets/pdf.js/web/viewer.html?file=') }}{{ $mahasiswa->berkas->surat_keterangan_bebas_beasiswa ?? ''}}"
+                                        width="100%" height="400px"></iframe>
+                                </div>
+                            </div>
+                            <div class="form-group has-icon-left">
+                                <label for="first-name-icon">Surat Pernytaan Bukan ASN</label>
+                                <div class="position-relative mb-3">
+                                    <iframe
+                                        src="{{ asset('assets/pdf.js/web/viewer.html?file=') }}{{ $mahasiswa->berkas->pernyataan_asn ?? ''}}"
+                                        width="100%" height="400px"></iframe>
+                                </div>
                             </div>
                         </div>
                     </div>

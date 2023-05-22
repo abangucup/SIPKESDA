@@ -45,8 +45,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::delete('/besiswa', [MahasiswaController::class, 'destroyBeasiswa'])->name('beasiswa.destroy');
             Route::delete('/beasiswa', [MahasiswaController::class, 'destroyBeasiswa'])->name('beasiswa.destroy');
             Route::get('/hasil', [MahasiswaController::class, 'hasil'])->name('hasilMahasiswa');
-            Route::post('/upload-data-pribadi', [MahasiswaController::class, 'berkasPribadi'])->name('berkas.pribadi');
-            Route::post('/upload-data-beasiswa', [MahasiswaController::class, 'berkasBeasiswa'])->name('berkas.beasiswa');
+            // Route::post('/upload-data-pribadi', [MahasiswaController::class, 'berkasPribadi'])->name('berkas.pribadi');
+            // Route::post('/upload-data-beasiswa', [MahasiswaController::class, 'berkasBeasiswa'])->name('berkas.beasiswa');
         });
 
         // Dasboard Operator
@@ -62,6 +62,9 @@ Route::group(['middleware' => 'auth'], function () {
             Route::resource('/subkriteria', SubkriteriaController::class);
             Route::put('/reupload/{id}', [OperatorController::class, 'reupload'])->name('reupload');
             Route::put('/reupload-pribadi/{id}', [OperatorController::class, 'reuploadDataPribadi'])->name('reupload-pribadi');
+
+            // downlaod berkas terkompres
+            Route::get('/download-berkas/{mahasiswa_id}', [OperatorController::class, 'download'])->name('download-berkas');
         });
         Route::put('/update/biodata/{mahasiswa_id}', [MahasiswaController::class, 'updateBiodata'])->name('update.biodata');
 
@@ -78,6 +81,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/laporan/hasil/cetak', [LaporanController::class, 'cetakHasil'])->name('cetak.hasil');
     });
 
+    Route::get('/upload/berkas', [AuthController::class, 'upload'])->name('upload');
+    Route::post('/upload/berkas', [AuthController::class, 'storeBerkas']);
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });

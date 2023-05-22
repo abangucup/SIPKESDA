@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use ZipArchive;
 use App\Models\Kriteria;
 use App\Models\Mahasiswa;
 use App\Models\Operator;
@@ -22,30 +23,30 @@ class OperatorController extends Controller
         return view('operator.penerima_beasiswa', compact('mahasiswas', 'kriterias'));
     }
 
-    public function reupload($id)
-    {
-        $mahasiswa = Mahasiswa::findOrFail($id);
-        $file = public_path('storage/mahasiswa/beasiswa/' . $mahasiswa->berkas_beasiswa);
+    // public function reupload($id)
+    // {
+    //     $mahasiswa = Mahasiswa::findOrFail($id);
+    //     $file = public_path('storage/mahasiswa/beasiswa/' . $mahasiswa->berkas_beasiswa);
 
-        if (File::exists($file)) {
-            File::delete($file);
-            $mahasiswa->berkas_beasiswa = null;
-            $mahasiswa->save();
-        }
-        return redirect()->back();
-    }
-    public function reuploadDataPribadi($id)
-    {
-        $mahasiswa = Mahasiswa::findOrFail($id);
-        $file = public_path('storage/mahasiswa/pribadi/' . $mahasiswa->berkas_pribadi);
+    //     if (File::exists($file)) {
+    //         File::delete($file);
+    //         $mahasiswa->berkas_beasiswa = null;
+    //         $mahasiswa->save();
+    //     }
+    //     return redirect()->back();
+    // }
+    // public function reuploadDataPribadi($id)
+    // {
+    //     $mahasiswa = Mahasiswa::findOrFail($id);
+    //     $file = public_path('storage/mahasiswa/pribadi/' . $mahasiswa->berkas_pribadi);
 
-        if (File::exists($file)) {
-            File::delete($file);
-            $mahasiswa->berkas_pribadi = null;
-            $mahasiswa->save();
-        }
-        return redirect()->back();
-    }
+    //     if (File::exists($file)) {
+    //         File::delete($file);
+    //         $mahasiswa->berkas_pribadi = null;
+    //         $mahasiswa->save();
+    //     }
+    //     return redirect()->back();
+    // }
 
     public function detail($mahasiswa_id)
     {
@@ -137,5 +138,54 @@ class OperatorController extends Controller
     {
         Operator::destroy($id);
         return redirect()->route('petugas.index');
+    }
+
+    public function download($mahasiswa_id)
+    {
+        $mahasiswa = Mahasiswa::findOrFail($mahasiswa_id);
+        $zipFileName = 'storage/berkas/' . $mahasiswa->nama . '.zip';
+        $zip = new ZipArchive();
+        if ($zip->open(public_path($zipFileName), ZipArchive::CREATE | ZipArchive::OVERWRITE)) {
+            // $surat_permohonan = public_path('storage/berkas/qMzCLzrZoiKq2ARHXiu72tKp77DVTN15JSS2sykS.pdf');
+            // $file2 = public_path('storage/berkas/F3A2AFxZcS9LYFJR3TgVxBDGUVS9ckgth2IFHx5s.pdf');
+            $surat_permohonan = $mahasiswa->berkas->surat_permohonan;
+            $surat_keterangan_selesai_proposal = $mahasiswa->berkas->surat_keterangan_selesai_proposal;
+            $rekening_aktif = $mahasiswa->berkas->rekening_aktif;
+            $ktp = $mahasiswa->berkas->ktp;
+            $kk = $mahasiswa->berkas->kk;
+            $ktm = $mahasiswa->berkas->ktm;
+            $transkip_nilai = $mahasiswa->berkas->transkip_nilai;
+            $pernyataan_asn = $mahasiswa->berkas->pernyataan_asn;
+            $surat_aktif_kuliah = $mahasiswa->berkas->surat_aktif_kuliah;
+            $surat_keterangan_bebas_beasiswa = $mahasiswa->berkas->surat_keterangan_bebas_beasiswa;
+
+            $content1 = file_get_contents($surat_permohonan);
+            $content2 = file_get_contents($surat_keterangan_selesai_proposal);
+            $content3 = file_get_contents($rekening_aktif);
+            $content4 = file_get_contents($ktp);
+            $content5 = file_get_contents($kk);
+            $content6 = file_get_contents($ktm);
+            $content7 = file_get_contents($transkip_nilai);
+            $content8 = file_get_contents($pernyataan_asn);
+            $content9 = file_get_contents($surat_aktif_kuliah);
+            $content10 = file_get_contents($surat_keterangan_bebas_beasiswa);
+
+            $zip->addFromString('surat_permohonan.pdf', $content1);
+            $zip->addFromString('surat_keterangan_selesai_proposap.pdf', $content2);
+            $zip->addFromString('rekening_aktif.pdf', $content3);
+            $zip->addFromString('ktp.pdf', $content4);
+            $zip->addFromString('kk.pdf', $content5);
+            $zip->addFromString('ktm.pdf', $content6);
+            $zip->addFromString('transkip_nilai.pdf', $content7);
+            $zip->addFromString('pernyataan_asn.pdf', $content8);
+            $zip->addFromString('surat_aktif_kuliah.pdf', $content9);
+            $zip->addFromString('surat_keterangan_bebas_beasiswa.pdf', $content10);
+
+            $zip->close();
+
+            return response()->download(public_path($zipFileName))->deleteFileAfterSend();
+        }
+
+        return redirect()->back()->with('error', 'Failed to create compressed file.');
     }
 }

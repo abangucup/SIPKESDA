@@ -25,7 +25,8 @@
 <section class="section">
     <div class="card">
         <div class="card-body shadow">
-            <button class="btn btn-outline-warning mb-4" data-bs-toggle="modal" data-bs-target="#updateBiodataMhs-{{ auth()->user()->mahasiswa_id }}">Update Biodata</button>
+            <button class="btn btn-outline-warning mb-4" data-bs-toggle="modal"
+                data-bs-target="#updateBiodataMhs-{{ auth()->user()->mahasiswa_id }}">Update Biodata</button>
             <table class="table table-striped" id="tabel_mahasiswa">
                 <thead>
                     <tr>
@@ -51,13 +52,10 @@
                         {{-- JIKA MAHASISWA BELUM MEMPUNYAI KRITERIA MAKA LAKUKAN TAMBAH TERLEBIH DAHULU --}}
                         @if ($mahasiswa->subkriteria->isEmpty())
                         <td class="col-2">
-                            @if ($mahasiswa->berkas_pribadi == null)
                             {{-- UPLOAD BERKAS PRIBADI JIKA BERKAS PRIBADI KOSONG --}}
-                            <div></div>
-                            @include('mahasiswa.berkas_pribadi')
+                            {{-- @include('mahasiswa.berkas_pribadi') --}}
 
                             {{-- JIKA TIDAK KOSONG --}}
-                            @else
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <button class="btn btn-outline-info float-sm-start mb-2 me-4"
                                     id="nav-tambah-kriteria-mahasiswa" data-bs-toggle="tab"
@@ -66,7 +64,6 @@
 
 
                             </div>
-                            @endif
                         </td>
                         {{-- JIKA SUKA MELAKUKAN TAMBAH MAKA MUNCULKAN TOMBOL EDIT DAN HAPUS --}}
                         @else
@@ -77,9 +74,6 @@
                                     data-bs-target="#nav-editKriteriaMahasiswa-{{$mahasiswa->id}}" type="button"
                                     role="tab" aria-controls="nav-editKriteriaMahasiswa"
                                     aria-selected="false">Edit</button>
-
-
-
                                 <form action="{{route('beasiswa.destroy', $mahasiswa->id)}}" method="POST">
                                     @method('DELETE')
                                     @csrf
@@ -94,27 +88,6 @@
             </table>
             @include('mahasiswa.tambah_kriteria')
             @include('mahasiswa.edit_kriteria')
-
-            <div>
-            <!-- BUTTON  UPLOAD BERKAS PNDUKUN BEASISWA-->
-            @if ($mahasiswa->berkas_beasiswa == null)
-            <!-- Button Upload Berkas Beasiswa-->
-            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#berkasBeasiswa">
-                <i class="bi bi-upload pe-2"></i>
-                UPLOAD BERKAS BEASISWA
-            </button>
-            @include('mahasiswa.berkas_beasiswa')
-            @endif
-        </div>
-            @if ($mahasiswa->berkas_pribadi == null)
-                {{-- UPLOAD BERKAS PRIBADI JIKA BERKAS PRIBADI KOSONG --}}
-                <button type="button" class="btn btn-outline-info" data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop">
-                    <i class="bi bi-upload pe-2"></i>
-                    UPLOAD BERKAS PRIBADI
-                </button>
-                @include('mahasiswa.berkas_pribadi')
-            @endif
         </div>
     </div>
 </section>

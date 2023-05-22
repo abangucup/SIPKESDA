@@ -156,7 +156,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-2" type="submit">Daftar</button>
+                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-2" type="submit">Next</button>
                     </form>
 
                     <div class="auth-left">

@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('kode');
             $table->string('kriteria');
             $table->enum('jenis', ['benefit', 'cost']);
-            $table->float('bobot');
-            $table->float('min')->nullable();
-            $table->float('max')->nullable();
-            $table->float('batasan', 8, 4)->nullable();
+            $table->float('bobot', 8, 2);
+            $table->float('min', 8, 2)->nullable();
+            $table->float('max', 8, 2)->nullable();
+            $table->float('batasan', 10, 10)->nullable();
             $table->timestamps();
         });
     }

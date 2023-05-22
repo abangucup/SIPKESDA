@@ -98,7 +98,7 @@ class MahasiswaController extends Controller
         $namepribadi = time() . '.' . $filepribadi->getClientOriginalExtension();
         $filepribadi->storeAs('mahasiswa/pribadi', $namepribadi, 'public');
 
-        if($request->berkas_beasiswa != null) {
+        if ($request->berkas_beasiswa != null) {
 
             // upload berkas beasiswa
             $filebeasiswa = $request->file('berkas_beasiswa');
@@ -165,8 +165,8 @@ class MahasiswaController extends Controller
     public function hasil()
     {
         $kriterias = Kriteria::all();
-        $mahasiswas = Mahasiswa::all();
-        return view('mahasiswa.hasil', compact('mahasiswas', 'kriterias'));
+        // $mahasiswas = Mahasiswa::all();
+        $mahasiswa = Mahasiswa::findOrFail(auth()->user()->mahasiswa_id);
+        return view('mahasiswa.hasil', compact('mahasiswa', 'kriterias'));
     }
-
 }

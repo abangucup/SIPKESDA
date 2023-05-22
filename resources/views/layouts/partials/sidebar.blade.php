@@ -26,23 +26,8 @@
 
                 <li class="sidebar-item {{Request::is('dashboard/operator/informasi') ? 'active' : ''}}">
                     <a href="{{ route('informasi.index')}}" class='sidebar-link'>
-                        {{-- <i class="bi bi-person-badge"></i> --}}
                         <i class="bi bi-info-circle-fill"></i>
                         <span>Informasi</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item {{Request::is('dashboard/operator/petugas') ? 'active' : ''}}">
-                    <a href="{{ route('petugas.index')}}" class='sidebar-link'>
-                        <i class="bi bi-person-badge"></i>
-                        <span>Data Operator</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item {{Request::is('dashboard/operator/mahasiswa') ? 'active' : ''}}">
-                    <a href="{{route('operator.mahasiswa')}}" class='sidebar-link'>
-                        <i class="bi bi-people"></i>
-                        <span>Data Mahasiswa</span>
                     </a>
                 </li>
 
@@ -64,6 +49,20 @@
                     <a href="{{route('hasil.index')}}" class='sidebar-link'>
                         <i class="bi bi-info-circle"></i>
                         <span>Proses Hitung</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item {{Request::is('dashboard/operator/petugas') ? 'active' : ''}}">
+                    <a href="{{ route('petugas.index')}}" class='sidebar-link'>
+                        <i class="bi bi-person-badge"></i>
+                        <span>Data Operator</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item {{Request::is('dashboard/operator/mahasiswa') ? 'active' : ''}}">
+                    <a href="{{route('operator.mahasiswa')}}" class='sidebar-link'>
+                        <i class="bi bi-people"></i>
+                        <span>Data Mahasiswa</span>
                     </a>
                 </li>
 
@@ -101,6 +100,7 @@
                 @endif
 
                 @auth
+                @if (auth()->user()->role != 'mahasiswa')
                 <li class="sidebar-item {{Request::is('dashboard/laporan/*') ? 'active' : ''}} has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-file-earmark"></i>
@@ -108,20 +108,19 @@
                     </a>
                     <ul class="submenu {{Request::is('dashboard/laporan/*') ? 'active' : ''}}">
 
-                        @if (auth()->user()->role != 'mahasiswa')
                         <li class="submenu-item {{Request::is('dashboard/laporan/penerima') ? 'active' : ''}}">
                             <a href="{{route('laporan.penerima')}}">Data Mahasiswa</a>
                         </li>
                         <li class="submenu-item {{Request::is('dashboard/laporan/beasiswa') ? 'active' : ''}}">
                             <a href="{{route('laporan.beasiswa')}}">Kriteria Beasiswa</a>
                         </li>
-                        @endif
-
                         <li class="submenu-item {{Request::is('dashboard/laporan/hasil') ? 'active' : ''}}">
                             <a href="{{route('laporan.hasil')}}">Hasil Perhitungan</a>
                         </li>
+
                     </ul>
                 </li>
+                @endif
                 <li class="sidebar-item">
                     <a href="{{ route('logout')}}" class='sidebar-link'>
                         <i class="bi bi-box-arrow-left"></i>

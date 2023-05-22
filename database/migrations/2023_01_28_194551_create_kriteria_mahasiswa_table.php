@@ -15,15 +15,13 @@ return new class extends Migration
     {
         Schema::create('kriteria_mahasiswa', function (Blueprint $table) {
             $table->increments('id');
-            // $table->foreignId('kriteria_id')->constrained()->onDelete('cascade');
             $table->integer('kriteria_id')->unsigned();
             $table->foreign('kriteria_id')->references('id')->on('kriterias')->onDelete('cascade');
-            // $table->foreignId('mahasiswa_id')->constrained()->onDelete('cascade');
             $table->integer('mahasiswa_id')->unsigned();
             $table->foreign('mahasiswa_id')->references('id')->on('mahasiswas')->onDelete('cascade');
-            $table->float('normalisasi', 8, 4)->nullable();
-            $table->float('tertimbang', 8,4)->nullable();
-            $table->float('jarak', 8,8)->nullable();
+            $table->float('normalisasi', 10, 6)->nullable();
+            $table->float('tertimbang', 8, 8)->nullable();
+            $table->float('jarak', 10, 10)->nullable();
             $table->timestamps();
         });
     }

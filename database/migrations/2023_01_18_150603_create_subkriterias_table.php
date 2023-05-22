@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('kriteria_id')->unsigned();
             $table->foreign('kriteria_id')->references('id')->on('kriterias')->onDelete('cascade');
             $table->string('subkriteria');
-            $table->float('nilai');
+            $table->float('nilai', 8, 2);
             $table->timestamps();
         });
     }

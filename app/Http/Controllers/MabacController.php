@@ -16,9 +16,9 @@ class MabacController extends Controller
     public function index()
     {
         $kriterias = Kriteria::all();
-        // $mahasiswas = Mahasiswa::all();
+        $mahasiswas = Mahasiswa::all();
         // Mahasiswa pada tahun ini
-        $mahasiswas = Mahasiswa::whereYear('created_at', Carbon::now()->year)->get();
+        // $mahasiswas = Mahasiswa::whereYear('created_at', Carbon::now()->year)->get();
 
         // melakukan perulangan untuk mendapatkan data per mahasiswa
         foreach ($mahasiswas as $mahasiswa) {
@@ -44,6 +44,7 @@ class MabacController extends Controller
                 ]);
             }
 
+
             foreach ($mahasiswa->subkriteria as $subkriteria) {
                 $mahasiswa->kriteria()->detach($subkriteria->kriteria->id);
                 if ($subkriteria->kriteria->jenis == 'benefit') {
@@ -52,6 +53,7 @@ class MabacController extends Controller
                         'tertimbang' => ($subkriteria->kriteria->bobot * (($subkriteria->nilai - $subkriteria->kriteria->min) / ($subkriteria->kriteria->max - $subkriteria->kriteria->min))) + $subkriteria->kriteria->bobot,
                         // 'jarak' => $subkriteria->nilai + 10,
                     ]);
+                    // dd($mahasiswa->pivot->normalisasi);
                 } else {
                     $mahasiswa->kriteria()->attach($subkriteria->kriteria->id, [
                         'normalisasi' => ($subkriteria->nilai - $subkriteria->kriteria->max) / ($subkriteria->kriteria->min - $subkriteria->kriteria->max),
@@ -72,10 +74,10 @@ class MabacController extends Controller
                 // melakukan perhitungan berulang pada setiap kriteria
                 $batasan *= $data->pivot->tertimbang;
                 $pangkat = 1 / count($mahasiswas);
-                Kriteria::where('id', $kriteria->id)->update([
-                    'batasan' => pow($batasan, $pangkat),
-                ]);
             }
+            Kriteria::where('id', $kriteria->id)->update([
+                'batasan' => pow($batasan, $pangkat),
+            ]);
         }
 
         // melakukan perhitungan jarak dari daerah perbatasan
