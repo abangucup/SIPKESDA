@@ -63,6 +63,10 @@ Route::group(['middleware' => 'auth'], function () {
             // Route::put('/reupload/{id}', [OperatorController::class, 'reupload'])->name('reupload');
             // Route::put('/reupload-pribadi/{id}', [OperatorController::class, 'reuploadDataPribadi'])->name('reupload-pribadi');
 
+            // Verifikasi Berkas
+            // Route::get('/verifikasi-berkas/{mahasiswa_id}', [OperatorController::class, 'verifikasi'])->name('verifikasi-berkas');
+            Route::post('/verifikasi-berkas', [OperatorController::class, 'storeVerifikasi'])->name('verifikasi');
+
             // downlaod berkas terkompres
             Route::get('/download-berkas/{mahasiswa_id}', [OperatorController::class, 'download'])->name('download-berkas');
 

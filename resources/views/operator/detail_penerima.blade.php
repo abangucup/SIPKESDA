@@ -148,6 +148,54 @@
                 @else --}}
                 {{-- <button class="btn btn-secondary float-end me-4"><i class="bi bi-download pe-2"></i>
                     Download</button> --}}
+                {{-- <a href="{{ route('verifikasi-berkas', $mahasiswa->id) }}"
+                    class="btn btn-success float-end me-4"><i class="bi bi-check pe-2"></i> Verifikasi</a> --}}
+                <!-- Button trigger modal -->
+                {{-- <button type="submit" class="btn btn-primary" class="btn btn-secondary float-end me-4"
+                    data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Launch demo modal
+                </button> --}}
+                <button type="submit" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                    class="btn btn-outline-success float-end me-4"><i class="bi bi-check-circle pe-2"></i>
+                    Verifikasi</button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <form action="{{route('verifikasi')}}" method="POST">
+                                @csrf
+                                <div class="modal-body ">
+                                    <label for="">ID Mahasiswa : </label>
+                                    <input type="text" class="form-control mb-4" name="mahasiswa_id"
+                                        value="{{ $mahasiswa->id }}" readonly>
+                                    <label>Verifikasi Berkas : </label>
+                                    <div class="form-group">
+                                        <select name="status_berkas" class="form-select">
+                                            <option value="diterima">Lulus Berkas</option>
+                                            <option value="ditolak">Berkas Ditolak</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                                        <i class="bx bx-x d-block d-sm-none"></i>
+                                        <span class="d-none d-sm-block">Close</span>
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">Verif</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
                 <a href="{{ route('download-berkas', $mahasiswa->id) }}" class="btn btn-secondary float-end me-4"><i
                         class="bi bi-download pe-2"></i> Download</a>
             </div>

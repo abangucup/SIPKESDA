@@ -23,6 +23,17 @@ class OperatorController extends Controller
         return view('operator.penerima_beasiswa', compact('mahasiswas', 'kriterias'));
     }
 
+    // Verifikasi Berkas
+    public function storeVerifikasi(Request $request)
+    {
+
+        $mahasiswa = Mahasiswa::findOrFail($request->mahasiswa_id);
+        $mahasiswa->update([
+            'status_berkas' => $request->status_berkas
+        ]);
+
+        return redirect()->back();
+    }
     // public function reupload($id)
     // {
     //     $mahasiswa = Mahasiswa::findOrFail($id);
