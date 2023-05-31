@@ -198,6 +198,12 @@
 
                 <a href="{{ route('download-berkas', $mahasiswa->id) }}" class="btn btn-secondary float-end me-4"><i
                         class="bi bi-download pe-2"></i> Download</a>
+
+                {{-- <form action="{{ route('upload') }}" method="get">
+                    <input type="text" name="mahasiswa_id" value="{{ $mahasiswa->id }}" hidden>
+                    <button class="btn btn-outline-info float-end me-4"><i class="bi bi-upload pe-2"></i> Upload
+                        Berkas</a>
+                </form> --}}
             </div>
             <div class="card-body shadow">
                 <div class="form-body">

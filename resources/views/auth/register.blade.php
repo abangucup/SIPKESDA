@@ -94,8 +94,13 @@
                             <div class="col-sm-6">
                                 <h6>Kampus</h6>
                                 <div class="form-group position-relative has-icon-left mb-3">
-                                    <input type="text" class="form-control form-control-lg" placeholder="kampus"
-                                        name="kampus" required>
+                                    {{-- <input type="text" class="form-control form-control-lg" placeholder="kampus"
+                                        name="kampus" required> --}}
+                                    <select name="kampus" class="form-control">
+                                        @foreach ($kampus as $item)
+                                        <option value="{{ $item->kampus }}">{{ $item->kampus }}</option>
+                                        @endforeach
+                                    </select>
                                     <div class="form-control-icon">
                                         <i class="bi bi-building"></i>
                                     </div>

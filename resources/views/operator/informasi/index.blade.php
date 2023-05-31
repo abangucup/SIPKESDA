@@ -48,7 +48,7 @@
                     @foreach ($informasis as $informasi)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $informasi->judul }}</td>
+                        <td>{!! $informasi->judul !!}</td>
                         <td>{!! Str::limit($informasi->deskripsi, $limit = 20, $end = '...') !!}</td>
                         <td>{{ \Carbon\Carbon::parse($informasi->created_at)->format('\T\a\n\g\g\a\l d F Y, \J\a\m
                             H:i')}}

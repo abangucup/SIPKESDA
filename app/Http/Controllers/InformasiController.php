@@ -27,7 +27,7 @@ class InformasiController extends Controller
         ]);
 
         $informasi  = new Informasi();
-        $informasi->judul = $validate['judul'];
+        $informasi->judul = htmlspecialchars($validate['judul']);
         $informasi->deskripsi = $validate['deskripsi'];
         $informasi->save();
 

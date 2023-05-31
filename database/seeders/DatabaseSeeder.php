@@ -23,9 +23,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             KriteriaSeeder::class,
             SubkriteriaSeeder::class,
+            KampusSeeder::class,
             MahasiswaSeeder::class,
             UserSeeder::class,
-            // MahasiswaSeeder::class,
         ]);
     }
 }

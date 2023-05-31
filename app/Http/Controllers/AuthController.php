@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 // use RealRashid\SweetAlert\Facades\Alert;
 use Alert;
 use App\Models\BerkasPribadi;
+use App\Models\Kampus;
 use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
@@ -43,7 +44,8 @@ class AuthController extends Controller
 
     public function register()
     {
-        return view('auth.register');
+        $kampus = Kampus::all();
+        return view('auth.register', compact('kampus'));
     }
 
     public function storeRegister(Request $request)

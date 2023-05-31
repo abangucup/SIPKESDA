@@ -34,6 +34,9 @@
 
                             <div class="col-sm-6">
 
+                                {{-- <input type="text" name="mahasiswa_id" value="{{ auth()->user()->mahasiswa_id }}"
+                                    hidden> --}}
+
                                 <h6>Surat Permohonan</h6>
                                 <div class="form-group mb-3">
                                     <input type="file" class="form-control form-control-lg" name="surat_permohonan"
